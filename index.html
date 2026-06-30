@@ -1,66 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
+
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
 
-    <h1>Admin Dashboard</h1>
+<h1>Admin Dashboard</h1>
 
-    <div class="form-section">
-        <h2>Add New Product</h2>
+<button class="add-btn" onclick="showForm()">
++ Add New Product
+</button>
 
-        <input type="text" id="name" placeholder="Product Name">
+<div id="productForm" style="display:none;">
 
-        <input type="number" id="price" placeholder="Product Price">
+<h2>Add New Product</h2>
 
-        <input type="number" id="quantity" placeholder="Product quantity">
+<input type="text" id="name" placeholder="Product Name">
 
+<input type="text" id="image" placeholder="Image URL">
 
-        <input type="number" id="stock" placeholder="Total Stock">
+<input type="number" id="purchasePrice" placeholder="Purchase Price">
 
+<input type="number" id="salesPrice" placeholder="Sales Price">
 
-        <input type="text" id="image" placeholder="Image URL">
+<input type="number" id="quantity" placeholder="Quantity">
 
-        <button onclick="addProduct()">Add Product</button>
-    </div>
-
-    <div class="report-buttons">
-        <button onclick="stockReport()">Stock Report</button>
-
-        <button onclick="salesReport()">Sales Report</button>
-    </div>
-
-    <h2>Product List</h2>
-
-    <table>
-
-        <thead>
-
-        <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>quantity</th>
-            <th>Stock</th>
-            <th>Action</th>
-        </tr>
-
-        </thead>
-
-        <tbody id="productTable">
-
-        </tbody>
-
-    </table>
+<button onclick="addProduct()">
+Save Product
+</button>
 
 </div>
 
+<br><br>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Image</th>
+
+<th>Name</th>
+
+<th>Purchase Price</th>
+
+<th>Sales Price</th>
+
+<th>Quantity</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="productTable">
+
+</tbody>
+
+</table>
+
+</div>
 
 <script src="script.js"></script>
 
