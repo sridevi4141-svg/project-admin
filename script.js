@@ -4,38 +4,34 @@ let products = JSON.parse(localStorage.getItem("products")) || [];
 // Display Products
 displayProducts();
 
-function addProduct() {
+function addProduct(){
 
-    let name = document.getElementById("name").value;
-    let price = document.getElementById("price").value;
-    let quantity = document.getElementById("quantity").value;
-    let stock = document.getElementById("stock").value;
-    let image = document.getElementById("image").value;
+let product={
 
-    if(name=="" || price=="" || stock==""){
-        alert("Please fill all fields");
-        return;
-    }
+name:document.getElementById("name").value,
 
-    let product = {
-        name:name,
-        price:price,
-       quantity:quantity,
-        stock:stock,
-        image:image
-    };
+image:document.getElementById("image").value,
 
-    products.push(product);
+purchasePrice:Number(document.getElementById("purchasePrice").value),
 
-    localStorage.setItem("products",JSON.stringify(products));
+salesPrice:Number(document.getElementById("salesPrice").value),
 
-    displayProducts();
+quantity:Number(document.getElementById("quantity").value)
 
-    document.getElementById("name").value="";
-    document.getElementById("price").value="";
-    document.getElementById("quantity").value="";
-    document.getElementById("stock").value="";
-    document.getElementById("image").value="";
+};
+
+products.push(product);
+
+localStorage.setItem("products",JSON.stringify(products));
+
+displayProducts();
+
+
+document.getElementById("name").value = "";
+document.getElementById("image").value = "";
+document.getElementById("purchasePrice").value = "";
+document.getElementById("salePrice").value = "";
+document.getElementById("quantity").value = "";
 }
 
 function displayProducts(){
@@ -56,18 +52,17 @@ function displayProducts(){
 
         <td>${item.name}</td>
 
-        <td>₹ ${item.price}</td>
+        <td>₹ ${item.purchasePrice}</td>
+        <td>₹ ${item.salesPrice}</td>
 
         
         <td>${item.quantity}</td>
 
-        <td>${item.stock}</td>
+       
 
         <td>
 
         <button class="edit-btn" onclick="editProduct(${index})">Edit</button>
-
-        <button class="delete-btn" onclick="deleteProduct(${index})">Delete</button>
 
         </td>
 
@@ -80,19 +75,6 @@ function displayProducts(){
 
 }
 
-function deleteProduct(index){
-
-    if(confirm("Delete this product?")){
-
-        products.splice(index,1);
-
-        localStorage.setItem("products",JSON.stringify(products));
-
-        displayProducts();
-
-    }
-
-}
 
 function editProduct(index){
 
@@ -141,3 +123,18 @@ let invoiceNo = Math.floor(Math.random()*100000);
 
 console.log("Invoice :",invoiceNo);
 
+function showForm(){
+
+    let form = document.getElementById("productForm");
+
+    if(form.style.display=="none"){
+
+        form.style.display="block";
+
+    }else{
+
+        form.style.display="none";
+
+    }
+
+}
