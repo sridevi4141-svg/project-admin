@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Admin Dashboard</h1>
+
+    <div class="form-section">
+        <h2>Add New Product</h2>
+
+        <input type="text" id="name" placeholder="Product Name">
+
+        <input type="number" id="price" placeholder="Product Price">
+
+        <input type="number" id="quantity" placeholder="Product quantity">
+
+
+        <input type="number" id="stock" placeholder="Total Stock">
+
+
+        <input type="text" id="image" placeholder="Image URL">
+
+        <button onclick="addProduct()">Add Product</button>
+    </div>
+
+    <div class="report-buttons">
+        <button onclick="stockReport()">Stock Report</button>
+
+        <button onclick="salesReport()">Sales Report</button>
+    </div>
+
+    <h2>Product List</h2>
+
+    <table>
+
+        <thead>
+
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>quantity</th>
+            <th>Stock</th>
+            <th>Action</th>
+        </tr>
+
+        </thead>
+
+        <tbody id="productTable">
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
