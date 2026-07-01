@@ -1,142 +1,137 @@
 import { db } from "./firebase.js";
-// Load Products from Local Storage
-let products = JSON.parse(localStorage.getItem("products")) || [];
 
-// Display Products
-displayProducts();
+import { 
+  collection,
+  addDoc,
+  onSnapshot,
+  doc,
+  updateDoc
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-function addProduct(){
-
-let product={
-
-name:document.getElementById("name").value,
-
-image:document.getElementById("image").value,
-
-purchasePrice:Number(document.getElementById("purchasePrice").value),
-
-salesPrice:Number(document.getElementById("salesPrice").value),
-
-quantity:Number(document.getElementById("quantity").value)
-
-};
-
-products.push(product);
-
-localStorage.setItem("products",JSON.stringify(products));
-
-displayProducts();
-
-
-document.getElementById("name").value = "";
-document.getElementById("image").value = "";
-document.getElementById("purchasePrice").value = "";
-document.getElementById("salePrice").value = "";
-document.getElementById("quantity").value = "";
-}
-
-function displayProducts(){
-
-    let table=document.getElementById("productTable");
-
-    table.innerHTML="";
-
-    products.forEach((item,index)=>{
-
-        table.innerHTML += `
-
-        <tr>
-
-        <td>
-        <img src="${item.image}" width="60">
-        </td>
-
-        <td>${item.name}</td>
-
-        <td>₹ ${item.purchasePrice}</td>
-        <td>₹ ${item.salesPrice}</td>
-
-        
-        <td>${item.quantity}</td>
-
-       
-
-        <td>
-
-        <button class="edit-btn" onclick="editProduct(${index})">Edit</button>
-
-        </td>
-
-        </tr>
-
-        `;
-
-    });
-   
-
-}
-
-
-function editProduct(index){
-
-    let newsalesPrice = prompt("Enter New salesPrice",products[index].salesPrice);
-
-    let newpurchasePrice = prompt("Enter New purchasePrice",products[index].purchaseprice);
-
-    if(newsalesPrice!=null){
-
-        products[index].salesPrice=newsalesPrice;
-
-    }
-
-    if(newpurchasePrice!=null){
-
-        products[index].purchaseP
-        
-        rice=newpurchasePrice;
-
-    }
-
-    localStorage.setItem("products",JSON.stringify(products));
-
-    displayProducts();
-
-}
-
-function stockReport(){
-
-    let report="";
-
-    products.forEach(item=>{
-
-        report += item.name + " : " + item.stock + " Items\n";
-
-    });
-
-    alert(report);
-
-}
-
-function salesReport(){
-
-    alert("Sales Report Module will be connected with Billing Page.");
-
-}
-let invoiceNo = Math.floor(Math.random()*100000);
-
-console.log("Invoice :",invoiceNo);
-
-function showForm(){
+// Show / Hide Form
+window.showForm = function () {
 
     let form = document.getElementById("productForm");
 
-    if(form.style.display=="none"){
+    if (form.style.display === "none" || form.style.display === "") {
+        form.style.display = "block";
+    } else {
+        form.style.display = "none";
+    }
+};
 
-        form.style.display="block";
+// Add Product
+window.addProduct = async function () {
 
-    }else{
+    const name = document.getElementById("name").value;
+    const image = document.getElementById("image").value;
+    const purchasePrice = Number(document.getElementById("purchasePrice").value);
+    const salesPrice = Number(document.getElementById("salesPrice").value);
+    const quantity = Number(document.getElementById("quantity").value);
 
-        form.style.display="none";
+    if (!name || !purchasePrice || !salesPrice || !quantity) {
+        alert("Please fill all fields");
+        return;
+    }
+
+    try {
+
+        await addDoc(collection(db, "products"), {
+
+            name,
+            image,
+            purchasePrice,
+            salesPrice,
+            quantity
+
+        });
+
+        alert("Product Added Successfully");
+
+        document.getElementById("name").value = "";
+        document.getElementById("image").value = "";
+        document.getElementById("purchasePrice").value = "";
+        document.getElementById("salesPrice").value = "";
+        document.getElementById("quantity").value = "";
+
+    } catch (error) {
+
+        console.error(error);
+        alert("Error adding product");
+
+    }
+
+};
+
+function loadProducts() {
+
+    const table = document.getElementById("productTable");
+
+    onSnapshot(collection(db, "products"), (snapshot) => {
+
+        table.innerHTML = "";
+
+        snapshot.forEach((doc) => {
+
+            const item = doc.data();
+
+            table.innerHTML += `
+                <tr>
+                    <td>
+                        <img src="${item.image}" width="60">
+                    </td>
+
+                    <td>${item.name}</td>
+
+                    <td>₹${item.purchasePrice}</td>
+
+                    <td>₹${item.salesPrice}</td>
+
+                    <td>${item.quantity}</td>
+
+                    <td>
+                        <td>
+    <button onclick="editProduct('${doc.id}', ${item.purchasePrice}, ${item.salesPrice})">
+        Edit
+    </button>
+</td>
+                       
+                    </td>
+                </tr>
+            `;
+        });
+
+    });
+
+}
+loadProducts();
+window.editProduct = async function(id, oldPurchase, oldSales) {
+
+    const purchasePrice = prompt("Enter New Purchase Price", oldPurchase);
+
+    if (purchasePrice === null) return;
+
+    const salesPrice = prompt("Enter New Sales Price", oldSales);
+
+    if (salesPrice === null) return;
+
+    try {
+
+        const productRef = doc(db, "products", id);
+
+        await updateDoc(productRef, {
+
+            purchasePrice: Number(purchasePrice),
+            salesPrice: Number(salesPrice)
+
+        });
+
+        alert("Price Updated Successfully");
+
+    } catch (error) {
+
+        console.log(error);
+        alert("Update Failed");
 
     }
 

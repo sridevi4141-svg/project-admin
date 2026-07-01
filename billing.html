@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cashier Billing</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+<h1>Cashier Billing System</h1>
+<h3 id="dateTime"></h3>
+<!-- Product List -->
+
+<h2>Available Products</h2><br>
+<input
+    type="text"
+    id="search"
+    placeholder="Search Product..."
+    onkeyup="searchProduct()"
+> <br><br>
+
+<table>
+
+<thead>
+
+<tr>
+<th>Image</th>
+<th>Product</th>
+<th>salesPrice</th>
+<th>purchasePrice</th>
+<th>Quantity</th>
+<th>Action</th>
+</tr>
+
+</thead>
+
+<tbody id="productList">
+
+</tbody>
+
+</table>
+
+<br><br>
+
+<!-- Bill Section -->
+
+<h2>Customer Bill</h2>
+
+<table>
+
+<thead>
+
+<thead>
+<tr>
+    <th>Product</th>
+    <th>Purchase Price</th>
+    <th>Sales Price</th>
+    <th>Qty</th>
+    <th>Total</th>
+</tr>
+</thead>
+
+</thead>
+
+<tbody id="billTable">
+
+</tbody>
+
+</table>
+
+<br>
+
+<h2 id="grandTotal">
+Grand Total : ₹0
+</h2>
+
+<button onclick="saveBill()">
+    Save Bill
+</button>
+
+
+<br>
+<br>
+
+<button onclick="clearBill()">
+Clear Bill
+</button>
+
+<button onclick="printBill()">
+Print Bill
+</button>
+
+</div>
+
+<div id="printArea" style="display:none;">
+
+    <center>
+        <h2>Billing System</h2>
+    </center>
+
+    <p>Invoice : <span id="printInvoice"></span></p>
+
+    <p>Date : <span id="printDate"></span></p>
+
+    <hr>
+
+    <table width="100%">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Qty</th>
+                <th>Amt</th>
+            </tr>
+        </thead>
+
+        <tbody id="printItems"></tbody>
+
+    </table>
+
+    <hr>
+
+    <h3 id="printTotal"></h3>
+
+</div>
+<script type="module" src="billing.js"></script>
+
+</body>
+</html>
