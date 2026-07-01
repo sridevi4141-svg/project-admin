@@ -24,9 +24,9 @@ function displayProducts() {
 
             <td>${item.name}</td>
 
-            <td>₹${item.price}</td>
+            <td>₹${item.purchasePrice}</td>
 
-            <td>${item.stock}</td>
+            <td>${item.salesPrice}</td>
 
             <td>
                 <button onclick="addToBill(${index})">
@@ -44,13 +44,13 @@ function displayProducts() {
 // Add Product To Bill
 function addToBill(index){
 
-    if(products[index].stock <= 0){
+    //if(products[index].stock <= 0){
 
-        alert("Out Of Stock");
+      //  alert("Out Of Stock");
 
-        return;
+      //  return;
 
-    }
+  //  }
 
     let found = bill.find(item => item.name === products[index].name);
 
@@ -58,18 +58,19 @@ function addToBill(index){
 
         found.qty++;
 
-        found.total = found.qty * found.price;
+        found.total = found.qty * found.purchasePrice;
 
     }else{
 
         bill.push({
 
-            name:products[index].name,
-            price:Number(products[index].price),
-            qty:1,
-            total:Number(products[index].price)
+    name: products[index].name,
+    purchasePrice: Number(products[index].purchasePrice),
+    salesPrice: Number(products[index].salesPrice),
+    qty: 1,
+    total: Number(products[index].salesPrice)
 
-        });
+});
 
     }
 
@@ -102,7 +103,8 @@ function displayBill(){
 
         <td>${item.name}</td>
 
-        <td>₹${item.price}</td>
+        <td>₹${item.salesPrice}</td>
+         <td>₹${item.purchasePrice}</td>
 
         <td>${item.qty}</td>
 
