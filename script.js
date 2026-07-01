@@ -78,19 +78,19 @@ function displayProducts(){
 
 function editProduct(index){
 
-    let newPrice = prompt("Enter New Price",products[index].price);
+    let newsalesPrice = prompt("Enter New salesPrice",products[index].salesPrice);
 
-    let newStock = prompt("Enter New Stock",products[index].stock);
+    let newpurchasePrice = prompt("Enter New purchasePrice",products[index].purchaseprice);
 
-    if(newPrice!=null){
+    if(newsalesPrice!=null){
 
-        products[index].price=newPrice;
+        products[index].salesPrice=newsalesPrice;
 
     }
 
-    if(newStock!=null){
+    if(newpurchasePrice!=null){
 
-        products[index].stock=newStock;
+        products[index].purchasePrice=newpurchasePrice;
 
     }
 
