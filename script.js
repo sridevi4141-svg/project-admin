@@ -1,3 +1,4 @@
+import { db } from "./firebase.js";
 // Load Products from Local Storage
 let products = JSON.parse(localStorage.getItem("products")) || [];
 
@@ -90,7 +91,9 @@ function editProduct(index){
 
     if(newpurchasePrice!=null){
 
-        products[index].purchasePrice=newpurchasePrice;
+        products[index].purchaseP
+        
+        rice=newpurchasePrice;
 
     }
 
