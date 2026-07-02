@@ -281,7 +281,23 @@ printArea.style.display = "block";
 setTimeout(() => {
     alert(document.getElementById("printArea").innerHTML);
 
+    const printArea = document.getElementById("printArea");
+
+printArea.style.display = "block";
+
+setTimeout(() => {
+
+    alert(document.getElementById("printArea").innerHTML);
+
     window.print();
+
+}, 500);
+
+window.onafterprint = function () {
+
+    printArea.style.display = "none";
+
+};
 
 }, 500);
 
