@@ -137,17 +137,52 @@ button{
 }
 
 }
-#printArea{
-    display:block !important;
-    visibility:visible !important;
+@media print {
 
-    position:fixed;
-    top:0;
-    left:0;
+    body *{
+        visibility:hidden;
+    }
 
-    width:100%;
+    #printArea,
+    #printArea *{
+        visibility:visible;
+    }
 
-    background:#fff;
+    #printArea{
 
-    z-index:99999;
+        display:block !important;
+
+        position:fixed;
+
+        top:0;
+        left:0;
+
+        width:58mm;
+        min-height:auto;
+
+        background:#fff;
+
+        padding:5px;
+
+        z-index:9999;
+    }
+
+    .container{
+        display:none !important;
+    }
+
+    table{
+        width:100%;
+        border-collapse:collapse;
+    }
+
+    th,td{
+        font-size:12px;
+        padding:3px;
+        border:none;
+    }
+
+    h2,h3,p{
+        margin:3px 0;
+    }
 }
