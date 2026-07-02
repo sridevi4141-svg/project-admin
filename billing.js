@@ -97,7 +97,7 @@ window.addToBill = function(index){
 
         found.qty++;
 
-        found.total = found.qty * found.salesPrice;
+        found.total = found.qty * found.purchasePrice;
 
     }else{
 
@@ -108,7 +108,7 @@ window.addToBill = function(index){
             purchasePrice: Number(products[index].purchasePrice),
             salesPrice: Number(products[index].salesPrice),
             qty: 1,
-            total: Number(products[index].salesPrice)
+            total: Number(products[index].purchasePrice)
 
         });
 

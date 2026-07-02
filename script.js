@@ -238,3 +238,4 @@ window.showProfitReport = function () {
 loadSales();
 
 loadStock();
+loadProfitReport();
