@@ -136,3 +136,105 @@ window.editProduct = async function(id, oldPurchase, oldSales) {
     }
 
 }
+function loadSales() {
+
+    const table = document.getElementById("salesTable");
+
+    onSnapshot(collection(db, "sales"), (snapshot) => {
+
+        table.innerHTML = "";
+
+        snapshot.forEach((doc) => {
+
+            const sale = doc.data();
+
+            table.innerHTML += `
+            <tr>
+
+                <td>${sale.invoiceNo}</td>
+
+                <td>${sale.date}</td>
+
+                <td>₹${sale.total}</td>
+
+            </tr>
+            `;
+
+        });
+
+    });
+
+}
+function loadStock() {
+
+    const table = document.getElementById("stockTable");
+
+    onSnapshot(collection(db, "products"), (snapshot) => {
+
+        table.innerHTML = "";
+
+        snapshot.forEach((doc) => {
+
+            const item = doc.data();
+
+            let status = "";
+
+            if(item.quantity == 0){
+
+                status = "Out Of Stock";
+
+            }else if(item.quantity <= 5){
+
+                status = "Low Stock";
+
+            }else{
+
+                status = "Available";
+
+            }
+
+            table.innerHTML += `
+
+            <tr>
+
+                <td>${item.name}</td>
+
+                <td>${item.quantity}</td>
+
+                <td>${status}</td>
+
+            </tr>
+
+            `;
+
+        });
+
+    });
+
+}
+window.showStockReport = function(){
+
+    document.getElementById("stockSection").style.display = "block";
+
+    document.getElementById("salesSection").style.display = "none";
+
+}
+
+window.showSalesReport = function () {
+
+    document.getElementById("salesSection").style.display = "block";
+
+    document.getElementById("stockSection").style.display = "none";
+
+};
+window.showProfitReport = function () {
+
+    document.getElementById("salesSection").style.display = "none";
+    document.getElementById("stockSection").style.display = "none";
+    document.getElementById("profitSection").style.display = "block";
+
+};
+
+loadSales();
+
+loadStock();

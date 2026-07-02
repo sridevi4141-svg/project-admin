@@ -69,6 +69,81 @@ Save Product
 
 </div>
 
+<br><br>
+
+<br><br>
+
+<button onclick="showSalesReport()">
+    Sales Report
+</button>
+
+<button onclick="showStockReport()">
+    Stock Report
+</button>
+
+<div id="salesSection" style="display:none;">
+
+    <h2>Sales Report</h2>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Invoice</th>
+                <th>Date</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+
+        <tbody id="salesTable"></tbody>
+
+    </table>
+
+</div>
+
+<br>
+
+<div id="stockSection" style="display:none;">
+
+    <h2>Stock Report</h2>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Stock</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody id="stockTable"></tbody>
+
+    </table>
+
+</div>
+<br>
+<br>
+<button onclick="showProfitReport()">
+    Profit & Loss Report
+</button>
+<div id="profitSection" style="display:none;">
+
+    <h2>Profit & Loss Report</h2>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Invoice</th>
+                <th>Revenue</th>
+                <th>Cost</th>
+                <th>Profit</th>
+            </tr>
+        </thead>
+
+        <tbody id="profitTable"></tbody>
+    </table>
+
+</div>
+
 <script type="module" src="script.js"></script>
 
 </body>
