@@ -279,16 +279,14 @@ window.printBill = async function () {
 printArea.style.display = "block";
 
 setTimeout(() => {
-    alert(document.getElementById("printArea").innerHTML);
-
+    
     const printArea = document.getElementById("printArea");
 
 printArea.style.display = "block";
 
 setTimeout(() => {
 
-    alert(document.getElementById("printArea").innerHTML);
-
+    
     window.print();
 
 }, 500);

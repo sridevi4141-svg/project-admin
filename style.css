@@ -115,6 +115,32 @@ table img{
     background:#bb2d3b;
 }
 
+#printArea h2{
+    font-size:16px;
+    margin:0;
+}
+
+#printArea h3{
+    font-size:14px;
+    margin:5px 0;
+}
+
+#printArea p{
+    margin:2px 0;
+    font-size:11px;
+}
+
+#printArea table{
+    width:100%;
+    font-size:11px;
+}
+
+#printArea th,
+#printArea td{
+    padding:3px;
+    text-align:left;
+}
+
 @media(max-width:768px){
 
 table{
