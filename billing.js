@@ -293,3 +293,29 @@ window.printBill = async function () {
     }
 
 };
+
+async function getInvoiceNumber() {
+
+    const counterRef = doc(db, "counter", "invoice");
+    const counterSnap = await getDoc(counterRef);
+
+    let invoiceNo = 1;
+
+    if (counterSnap.exists()) {
+
+        invoiceNo = counterSnap.data().lastNo + 1;
+
+        await updateDoc(counterRef, {
+            lastNo: invoiceNo
+        });
+
+    } else {
+
+        await setDoc(counterRef, {
+            lastNo: 1
+        });
+
+    }
+
+    return "INV-" + invoiceNo.toString().padStart(4, "0");
+}
