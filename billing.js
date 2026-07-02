@@ -97,7 +97,7 @@ window.addToBill = function(index){
 
         found.qty++;
 
-        found.total = found.qty * found.purchasePrice;
+        found.total = found.qty * found.salesPrice;
 
     }else{
 
@@ -108,7 +108,7 @@ window.addToBill = function(index){
             purchasePrice: Number(products[index].purchasePrice),
             salesPrice: Number(products[index].salesPrice),
             qty: 1,
-            total: Number(products[index].purchasePrice)
+            total: Number(products[index].salesPrice)
 
         });
 
@@ -201,101 +201,18 @@ window.clearBill = function(){
 
 
 // Print
-window.printBill = function () {
+window.printBill = async function () {
 
     if (bill.length === 0) {
-
         alert("Bill Empty");
-
-        return;
-
-    }
-
-    document.getElementById("printInvoice").innerText = currentInvoice;
-
-    document.getElementById("printDate").innerText =
-        new Date().toLocaleString();
-
-    let rows = "";
-
-    bill.forEach(item => {
-
-        rows += `
-        <tr>
-            <td>${item.name}</td>
-            <td>${item.qty}</td>
-            <td>${item.total}</td>
-        </tr>
-        `;
-
-    });
-
-    document.getElementById("printItems").innerHTML = rows;
-
-    document.getElementById("printTotal").innerHTML =
-        "Grand Total : ₹" + grandTotal;
-
-    document.getElementById("printArea").style.display = "block";
-
-    window.print();
-
-    document.getElementById("printArea").style.display = "none";
-
-}
-// Date Time
-setInterval(()=>{
-
-    document.getElementById("dateTime").innerHTML =
-        new Date().toLocaleString();
-
-},1000);
-
-async function getInvoiceNumber() {
-
-    const counterRef = doc(db, "counter", "invoice");
-
-    const counterSnap = await getDoc(counterRef);
-
-    let invoiceNo = 1;
-
-    if (counterSnap.exists()) {
-
-        invoiceNo = counterSnap.data().lastNo + 1;
-
-        await updateDoc(counterRef, {
-
-            lastNo: invoiceNo
-
-        });
-
-    } else {
-
-        await setDoc(counterRef, {
-
-            lastNo: 1
-
-        });
-
-    }
-
-    return "INV-" + invoiceNo.toString().padStart(4, "0");
-
-}
-window.saveBill = async function () {
-
-    if (bill.length === 0) {
-        alert("Bill is Empty");
         return;
     }
 
     try {
 
-        
         // Invoice Number
         const invoiceNo = await getInvoiceNumber();
-        
-
-          currentInvoice = invoiceNo;
+        currentInvoice = invoiceNo;
 
         // Save Sale
         await addDoc(collection(db, "sales"), {
@@ -305,7 +222,7 @@ window.saveBill = async function () {
             total: grandTotal
         });
 
-        // Reduce Stock
+        // Update Stock
         for (const item of bill) {
 
             const productRef = doc(db, "products", item.id);
@@ -315,13 +232,13 @@ window.saveBill = async function () {
                 const productDoc = await transaction.get(productRef);
 
                 if (!productDoc.exists()) {
-                    throw "Product not found";
+                    throw new Error("Product not found");
                 }
 
                 const currentQty = productDoc.data().quantity;
 
                 if (currentQty < item.qty) {
-                    throw `${item.name} Out Of Stock`;
+                    throw new Error(item.name + " Out Of Stock");
                 }
 
                 transaction.update(productRef, {
@@ -332,9 +249,38 @@ window.saveBill = async function () {
 
         }
 
-       
+        // Prepare Print Data
+        document.getElementById("printInvoice").innerText = currentInvoice;
 
-        // Clear Bill
+        document.getElementById("printDate").innerText =
+            new Date().toLocaleString();
+
+        let rows = "";
+
+        bill.forEach(item => {
+
+            rows += `
+            <tr>
+                <td>${item.name}</td>
+                <td>${item.qty}</td>
+                <td>₹${item.total}</td>
+            </tr>
+            `;
+
+        });
+
+        document.getElementById("printItems").innerHTML = rows;
+
+        document.getElementById("printTotal").innerHTML =
+            "Grand Total : ₹" + grandTotal;
+
+        document.getElementById("printArea").style.display = "block";
+
+        window.print();
+
+        document.getElementById("printArea").style.display = "none";
+
+        // Clear Bill AFTER Printing
         bill = [];
         grandTotal = 0;
         displayBill();
@@ -342,8 +288,8 @@ window.saveBill = async function () {
     } catch (error) {
 
         console.error(error);
-        alert(error);
+        alert(error.message || error);
 
     }
 
-}
+};
