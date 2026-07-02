@@ -137,34 +137,17 @@ button{
 }
 
 }
-@media print {
+#printArea{
+    display:block !important;
+    visibility:visible !important;
 
-    body * {
-        visibility: hidden;
-    }
+    position:fixed;
+    top:0;
+    left:0;
 
-    #printArea,
-    #printArea * {
-        visibility: visible;
-    }
+    width:100%;
 
-    #printArea {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 58mm;
-        font-size: 12px;
-    }
+    background:#fff;
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    th,
-    td {
-        padding: 3px;
-        text-align: left;
-    }
-
+    z-index:99999;
 }
