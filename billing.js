@@ -280,7 +280,76 @@ printArea.style.display = "block";
 
 setTimeout(() => {
 
-    window.print();
+    const printWindow = window.open("", "_blank");
+
+printWindow.document.write(`
+<html>
+<head>
+<title>Invoice</title>
+<style>
+body{
+    font-family: Arial;
+    width:58mm;
+    margin:0;
+    padding:5px;
+    font-size:12px;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+th,td{
+    padding:3px;
+    text-align:left;
+}
+hr{
+    border:1px dashed #000;
+}
+</style>
+</head>
+
+<body>
+
+<center>
+<h2>Billing System</h2>
+</center>
+
+<p><b>Invoice:</b> ${currentInvoice}</p>
+<p><b>Date:</b> ${new Date().toLocaleString()}</p>
+
+<hr>
+
+<table>
+
+<tr>
+<th>Item</th>
+<th>Qty</th>
+<th>Amt</th>
+</tr>
+
+${rows}
+
+</table>
+
+<hr>
+
+<h3>Grand Total : ₹${grandTotal}</h3>
+
+</body>
+</html>
+`);
+
+printWindow.document.close();
+
+setTimeout(() => {
+
+    printWindow.focus();
+
+    printWindow.print();
+
+    printWindow.close();
+
+},500);
 
 }, 500);
 
