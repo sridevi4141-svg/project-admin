@@ -274,11 +274,21 @@ window.printBill = async function () {
         document.getElementById("printTotal").innerHTML =
             "Grand Total : ₹" + grandTotal;
 
-        document.getElementById("printArea").style.display = "block";
+        const printArea = document.getElementById("printArea");
 
-        window.print();
+printArea.style.display = "block";
 
-        document.getElementById("printArea").style.display = "none";
+setTimeout(() => {
+
+    window.print();
+
+}, 500);
+
+window.onafterprint = function () {
+
+    printArea.style.display = "none";
+
+};
 
         // Clear Bill AFTER Printing
         bill = [];
