@@ -1,13 +1,13 @@
 import { db } from "./firebase.js";
 
-import { 
-  collection,
-  addDoc,
-  onSnapshot,
-  doc,
-  updateDoc
+import {
+    collection,
+    addDoc,
+    onSnapshot,
+    doc,
+    updateDoc,
+    getDocs
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
 // Show / Hide Form
 window.showForm = function () {
 
@@ -235,6 +235,100 @@ window.showProfitReport = function () {
 
 };
 
+
+
+window.showProfitReport = async function () {
+
+    const report = document.getElementById("profitReport");
+
+    report.innerHTML = "<h3>Loading...</h3>";
+
+    let totalSales = 0;
+    let totalPurchase = 0;
+
+    try {
+
+        const salesSnap = await getDocs(collection(db, "sales"));
+
+        salesSnap.forEach((saleDoc) => {
+
+            const sale = saleDoc.data();
+
+            sale.items.forEach((item) => {
+
+                totalSales += Number(item.salesPrice) * Number(item.qty);
+
+                totalPurchase += Number(item.purchasePrice) * Number(item.qty);
+
+            });
+
+        });
+
+        const amount = totalSales - totalPurchase;
+
+        let status = "";
+        let color = "";
+
+        if (amount > 0) {
+
+            status = "✅ PROFIT";
+            color = "green";
+
+        } else if (amount < 0) {
+
+            status = "❌ LOSS";
+            color = "red";
+
+        } else {
+
+            status = "➖ NO PROFIT / NO LOSS";
+            color = "blue";
+
+        }
+
+        report.innerHTML = `
+
+        <h2>Profit & Loss Report</h2>
+
+        <table border="1" cellpadding="10" cellspacing="0">
+
+            <tr>
+                <th>Total Purchase</th>
+                <td>₹${totalPurchase}</td>
+            </tr>
+
+            <tr>
+                <th>Total Sales</th>
+                <td>₹${totalSales}</td>
+            </tr>
+
+            <tr>
+                <th>Status</th>
+                <td style="color:${color};font-weight:bold;">
+                    ${status}
+                </td>
+            </tr>
+
+            <tr>
+                <th>Amount</th>
+                <td style="color:${color};font-weight:bold;">
+                    ₹${Math.abs(amount)}
+                </td>
+            </tr>
+
+        </table>
+
+        `;
+
+    } catch (error) {
+
+        console.log(error);
+
+        report.innerHTML = "<h3>Error Loading Report</h3>";
+
+    }
+
+};
 loadSales();
 
 loadStock();
