@@ -200,7 +200,6 @@ window.clearBill = function(){
 
 
 
-// Print
 window.printBill = async function () {
 
     if (bill.length === 0) {
@@ -246,79 +245,68 @@ window.printBill = async function () {
                 });
 
             });
-
         }
 
-        // Prepare Print Data
+        // Invoice & Date
         document.getElementById("printInvoice").innerText = currentInvoice;
-
         document.getElementById("printDate").innerText =
             new Date().toLocaleString();
 
+        // Bill Items
         let rows = "";
+        let totalQty = 0;
 
-        bill.forEach(item => {
+        bill.forEach((item, index) => {
+
+            totalQty += item.qty;
 
             rows += `
             <tr>
+                <td>${index + 1}</td>
                 <td>${item.name}</td>
                 <td>${item.qty}</td>
+                <td>₹${item.salesPrice}</td>
                 <td>₹${item.total}</td>
             </tr>
             `;
-
         });
 
         document.getElementById("printItems").innerHTML = rows;
 
-        document.getElementById("printTotal").innerHTML =
-            "Grand Total : ₹" + grandTotal;
+        document.getElementById("totalQty").innerText = totalQty;
+        document.getElementById("totalItems").innerText = bill.length;
 
+        document.getElementById("printTotal").innerText = "₹" + grandTotal;
+        document.getElementById("received").innerText = "₹" + grandTotal;
+
+        // Show Print Area
         const printArea = document.getElementById("printArea");
+        printArea.style.display = "block";
 
-printArea.style.display = "block";
+        setTimeout(() => {
 
-setTimeout(() => {
-    
-    const printArea = document.getElementById("printArea");
+            window.print();
 
-printArea.style.display = "block";
+        }, 500);
 
-setTimeout(() => {
+        window.onafterprint = function () {
 
-    
-    window.print();
+            printArea.style.display = "none";
 
-}, 500);
+            bill = [];
+            grandTotal = 0;
+            displayBill();
 
-window.onafterprint = function () {
-
-    printArea.style.display = "none";
-
-};
-
-}, 500);
-
-window.onafterprint = function () {
-
-    printArea.style.display = "none";
-
-};
-
-        // Clear Bill AFTER Printing
-        bill = [];
-        grandTotal = 0;
-        displayBill();
+        };
 
     } catch (error) {
 
         console.error(error);
-        alert(error.message || error);
+        alert(error.message);
 
     }
 
 };
-
 async function getInvoiceNumber() {
 
     const counterRef = doc(db, "counter", "invoice");

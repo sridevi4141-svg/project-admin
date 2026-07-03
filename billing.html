@@ -88,53 +88,136 @@ Print Bill
 
 </div>
 
+<!-- ===================== PRINT AREA ===================== -->
+
 <div id="printArea" style="display:none;">
 
-    <center>
+    <div class="receipt">
 
-<h2>Sri Lakshmi Chandrika Traders</h2>
+        <center>
 
-<p>Komaripalem - 533346</p>
+            <h2>SRI LAKSHMI CHANDRIKA</h2>
+            <h2>TRADERS</h2>
 
-<p>Cinema Hall Road</p>
+            <p>Komaripalem - 533346</p>
 
-<p>Ph: 9299999117 / 8333853111</p>
+            <p>Cinema Hall Road</p>
 
-<hr>
+            <p>Ph : 9299999117 / 8333853111</p>
 
-<h3>TAX INVOICE</h3>
+            <h3>TAX INVOICE</h3>
 
-</center>
+        </center>
 
-<p><b>Invoice No :</b> <span id="printInvoice"></span></p>
+        <hr>
 
-<p><b>Date :</b> <span id="printDate"></span></p>
+        <div class="invoiceRow">
 
-<hr>
+            <span>
+                <b>Invoice :</b>
+                <span id="printInvoice"></span>
+            </span>
 
-<table width="100%">
-    <thead>
-        <tr>
-            <th>Item</th>
-            <th>Qty</th>
-            <th>Amt</th>
-        </tr>
-    </thead>
+            <span id="printDate"></span>
 
-    <tbody id="printItems"></tbody>
+        </div>
 
-</table>
+        <hr>
 
-<hr>
+        <center>
 
-<h3 id="printTotal"></h3>
+            <b>CASH SALE</b>
 
-<center>
+        </center>
 
-<p>Thank You Visit Again</p>
+        <hr>
 
-</center>
+        <table class="receiptTable">
 
+            <thead>
+
+                <tr>
+
+                    <th>#</th>
+
+                    <th>Item</th>
+
+                    <th>Qty</th>
+
+                    <th>Price</th>
+
+                    <th>Amt</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="printItems">
+
+            </tbody>
+
+        </table>
+
+        <hr>
+
+        <div class="invoiceRow">
+
+            <span>
+
+                Qty :
+                <b id="totalQty"></b>
+
+            </span>
+
+            <span>
+
+                Items :
+                <b id="totalItems"></b>
+
+            </span>
+
+        </div>
+
+        <hr>
+
+        <div class="invoiceRow">
+
+            <b>Total</b>
+
+            <b id="printTotal"></b>
+
+        </div>
+
+        <div class="invoiceRow">
+
+            <span>Received</span>
+
+            <span id="received"></span>
+
+        </div>
+
+        <div class="invoiceRow">
+
+            <span>Balance</span>
+
+            <span>₹0</span>
+
+        </div>
+
+        <hr>
+
+        <center>
+
+            <b>Thank You Visit Again</b>
+
+        </center>
+
+    </div>
+
+</div>
+
+<!-- ===================== END PRINT ===================== -->
+</div>
     
 <script type="module" src="billing.js"></script>
 
