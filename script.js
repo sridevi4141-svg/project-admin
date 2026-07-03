@@ -2,11 +2,15 @@ import { db } from "./firebase.js";
 
 import {
     collection,
-    addDoc,
     onSnapshot,
+    addDoc,
     doc,
+    getDoc,
+    setDoc,
     updateDoc,
-    getDocs
+    runTransaction,
+    query,
+    orderBy
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 // Show / Hide Form
 window.showForm = function () {
@@ -140,7 +144,12 @@ function loadSales() {
 
     const table = document.getElementById("salesTable");
 
-    onSnapshot(collection(db, "sales"), (snapshot) => {
+    const q = query(
+        collection(db, "sales"),
+        orderBy("invoiceNo", "desc")
+    );
+
+    onSnapshot(q, (snapshot) => {
 
         table.innerHTML = "";
 
