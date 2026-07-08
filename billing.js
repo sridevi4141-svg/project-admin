@@ -285,17 +285,15 @@ window.printBill = async function () {
 
         setTimeout(() => {
 
-    if (typeof Android !== "undefined") {
-
-    alert("Android Interface Connected");
+    if (window.Android) {
 
     const billData = document.getElementById("printArea").innerText;
-
     Android.printBill(billData);
 
 } else {
 
-    alert("Android Interface Missing");
+    window.print();
+
 }
 
 }, 500);
