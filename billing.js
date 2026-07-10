@@ -388,12 +388,43 @@ bill+="\n\n\n";
 Android.printBill(bill);
 
 }
-function scanBarcode() {
+function barcodeScanned(barcode) {
 
-    if (window.Android) {
-        Android.scanBarcode();
+    document.getElementById("barcode").value = barcode;
+
+    searchProductByBarcode(barcode);
+
+}
+
+async function searchProductByBarcode(barcode) {
+
+    const q = query(
+        collection(db, "products"),
+        where("barcode", "==", barcode)
+    );
+
+    const snap = await getDocs(q);
+
+    if (!snap.empty) {
+
+        const product = snap.docs[0].data();
+
+        addToCart(product);
+
     } else {
-        alert("Android App Only");
+
+        alert("Product Not Found");
+
     }
 
+}
+function barcodeScanned(barcode) {
+
+    console.log("Scanned Barcode:", barcode);
+
+    alert("Scanned: " + barcode);
+
+    // Next step:
+    // Firebase lo barcode search
+    // Product automatic ga bill ki add chestam.
 }
