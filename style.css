@@ -138,9 +138,157 @@ table img{
 #printArea th,
 #printArea td{
     padding:3px;
-    text-align:left;
+    text-align:center;
+
+
 }
 
+/* ================= THERMAL BILL ================= */
+
+.receipt{
+
+    width:58mm;
+
+    margin:auto;
+
+    padding:5px;
+
+    font-family:monospace;
+
+    font-size:12px;
+
+    color:#000;
+
+}
+
+.receipt h2{
+
+    margin:0;
+
+    font-size:18px;
+
+}
+
+.receipt h3{
+
+    margin:4px 0;
+
+    font-size:16px;
+
+}
+
+.receipt p{
+
+    margin:2px 0;
+
+    font-size:12px;
+
+}
+
+.invoiceRow{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin:3px 0;
+
+    font-size:12px;
+
+}
+
+.receiptTable{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.receiptTable th{
+
+    text-align:left;
+
+    border-bottom:1px dashed #000;
+
+    padding:3px 0;
+
+}
+
+.receiptTable td{
+
+    padding:3px 0;
+
+}
+
+.receiptTable th:nth-child(3),
+.receiptTable td:nth-child(3),
+
+.receiptTable th:nth-child(4),
+.receiptTable td:nth-child(4),
+
+.receiptTable th:nth-child(5),
+.receiptTable td:nth-child(5){
+
+    text-align:right;
+
+}
+
+hr{
+
+    border:none;
+
+    border-top:1px dashed #000;
+
+    margin:5px 0;
+
+}
+
+
+/* ================= PRINT ================= */
+
+@media print{
+
+body{
+
+margin:0;
+
+padding:0;
+
+}
+
+body *{
+
+visibility:hidden;
+
+}
+
+#printArea,
+#printArea *{
+
+visibility:visible;
+
+}
+
+#printArea{
+
+display:block !important;
+
+position:absolute;
+
+left:0;
+
+top:0;
+
+width:58mm;
+
+background:#fff;
+
+padding:5px;
+
+}
+
+}
 @media(max-width:768px){
 
 table{

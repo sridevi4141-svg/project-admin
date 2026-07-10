@@ -32,6 +32,7 @@ window.addProduct = async function () {
     const purchasePrice = Number(document.getElementById("purchasePrice").value);
     const salesPrice = Number(document.getElementById("salesPrice").value);
     const quantity = Number(document.getElementById("quantity").value);
+    const barcode = document.getElementById("barcode").value
 
     if (!name || !purchasePrice || !salesPrice || !quantity) {
         alert("Please fill all fields");

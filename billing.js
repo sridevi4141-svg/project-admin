@@ -388,3 +388,12 @@ bill+="\n\n\n";
 Android.printBill(bill);
 
 }
+function scanBarcode() {
+
+    if (window.Android) {
+        Android.scanBarcode();
+    } else {
+        alert("Android App Only");
+    }
+
+}
