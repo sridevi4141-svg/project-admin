@@ -94,126 +94,109 @@ Print Bill
 
     <div class="receipt">
 
-        <center>
+<center>
 
-            <h2>SRI LAKSHMI CHANDRIKA</h2>
-            <h2>TRADERS</h2>
+<h2>SRI LAKSHMI CHANDRIKA</h2>
+<h2>TRADERS</h2>
 
-            <p>Komaripalem - 533346</p>
+<p>Komaripalem - 533346</p>
 
-            <p>Cinema Hall Road</p>
+<p>Cinema Hall Road</p>
 
-            <p>Ph : 9299999117 / 8333853111</p>
+<p>Ph : 9299999117 / 8333853111</p>
 
-            <h3>TAX INVOICE</h3>
+<h3>TAX INVOICE</h3>
 
-        </center>
+</center>
 
-        <hr>
+<hr>
 
-        <div class="invoiceRow">
+<div class="invoiceRow">
 
-            <span>
-                <b>Invoice :</b>
-                <span id="printInvoice"></span>
-            </span>
+<span>
+Invoice :
+<b id="printInvoice"></b>
+</span>
 
-            <span id="printDate"></span>
+<span id="printDate"></span>
 
-        </div>
+</div>
 
-        <hr>
+<hr>
 
-        <center>
+<center>
+<b>CASH SALE</b>
+</center>
 
-            <b>CASH SALE</b>
+<hr>
 
-        </center>
+<table class="receiptTable">
 
-        <hr>
+<thead>
 
-        <table class="receiptTable">
+<tr>
 
-            <thead>
+<th>#</th>
+<th>Item</th>
+<th>Qty</th>
+<th>Price</th>
+<th>Amt</th>
 
-                <tr>
+</tr>
 
-                    <th>#</th>
+</thead>
 
-                    <th>Item</th>
+<tbody id="printItems">
 
-                    <th>Qty</th>
+</tbody>
 
-                    <th>Price</th>
+</table>
 
-                    <th>Amt</th>
+<hr>
 
-                </tr>
+<div class="invoiceRow">
 
-            </thead>
+<span>Qty : <b id="totalQty"></b></span>
 
-            <tbody id="printItems">
+<span>Items : <b id="totalItems"></b></span>
 
-            </tbody>
+</div>
 
-        </table>
+<hr>
 
-        <hr>
+<div class="invoiceRow">
 
-        <div class="invoiceRow">
+<b>Total</b>
 
-            <span>
+<b id="printTotal"></b>
 
-                Qty :
-                <b id="totalQty"></b>
+</div>
 
-            </span>
+<div class="invoiceRow">
 
-            <span>
+<span>Received</span>
 
-                Items :
-                <b id="totalItems"></b>
+<span id="received"></span>
 
-            </span>
+</div>
 
-        </div>
+<div class="invoiceRow">
 
-        <hr>
+<span>Balance</span>
 
-        <div class="invoiceRow">
+<span>0</span>
 
-            <b>Total</b>
+</div>
 
-            <b id="printTotal"></b>
+<hr>
 
-        </div>
+<center>
 
-        <div class="invoiceRow">
+<b>Thank You Visit Again</b>
 
-            <span>Received</span>
+</center>
 
-            <span id="received"></span>
-
-        </div>
-
-        <div class="invoiceRow">
-
-            <span>Balance</span>
-
-            <span>₹0</span>
-
-        </div>
-
-        <hr>
-
-        <center>
-
-            <b>Thank You Visit Again</b>
-
-        </center>
-
-    </div>
-
+</div>
 </div>
 
 <!-- ===================== END PRINT ===================== -->

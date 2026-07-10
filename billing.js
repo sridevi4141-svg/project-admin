@@ -340,3 +340,51 @@ async function getInvoiceNumber() {
 
     return "INV-" + invoiceNo.toString().padStart(4, "0");
 }
+function bluetoothPrint(){
+
+let bill="";
+
+bill+="[C]<b>SRI LAKSHMI CHANDRIKA</b>\n";
+bill+="[C]<b>TRADERS</b>\n";
+bill+="[C]Komaripalem - 533346\n";
+bill+="[C]Cinema Hall Road\n";
+bill+="[C]Ph : 9299999117 / 8333853111\n";
+bill+="--------------------------------\n";
+
+bill+="Invoice : "+invoiceNo+"\n";
+bill+=date+"\n";
+
+bill+="--------------------------------\n";
+
+bill+="[C]<b>CASH SALE</b>\n";
+
+bill+="--------------------------------\n";
+
+bill+="Item      Qty   Price   Amt\n";
+
+cart.forEach(item=>{
+
+bill+=item.name+"   "+item.qty+"   "+item.price+"   "+item.total+"\n";
+
+});
+
+bill+="--------------------------------\n";
+
+bill+="Qty : "+totalQty+"\n";
+bill+="Items : "+cart.length+"\n";
+
+bill+="--------------------------------\n";
+
+bill+="Total : "+grandTotal+"\n";
+bill+="Received : "+grandTotal+"\n";
+bill+="Balance : 0\n";
+
+bill+="--------------------------------\n";
+
+bill+="[C]Thank You Visit Again\n";
+
+bill+="\n\n\n";
+
+Android.printBill(bill);
+
+}
