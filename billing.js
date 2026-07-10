@@ -418,13 +418,3 @@ async function searchProductByBarcode(barcode) {
     }
 
 }
-function barcodeScanned(barcode) {
-
-    console.log("Scanned Barcode:", barcode);
-
-    alert("Scanned: " + barcode);
-
-    // Next step:
-    // Firebase lo barcode search
-    // Product automatic ga bill ki add chestam.
-}
