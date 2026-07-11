@@ -88,8 +88,8 @@ Clear Bill
 <button onclick="printBill()">
 Print Bill
 </button>
-    <button onclick="scanBarcode()">
-    Scan Barcode
+ <button id="scanBtn" onclick="scanBarcode()">
+    <span>📷</span> Scan Barcode
 </button>
 
 </div>
@@ -164,9 +164,9 @@ Invoice :
 
 <div class="invoiceRow">
 
-<span>Qty : <b id="totalQty"></b></span>
-
-<span>Items : <b id="totalItems"></b></span>
+    <span>
+        <b>Items : <span id="totalItems"></span></b>
+    </span>
 
 </div>
 

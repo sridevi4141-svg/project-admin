@@ -273,7 +273,7 @@ window.printBill = async function () {
 
         document.getElementById("printItems").innerHTML = rows;
 
-        document.getElementById("totalQty").innerText = totalQty;
+       
         document.getElementById("totalItems").innerText = bill.length;
 
         document.getElementById("printTotal").innerText = "₹" + grandTotal;
@@ -370,7 +370,7 @@ bill+=item.name+"   "+item.qty+"   "+item.price+"   "+item.total+"\n";
 
 bill+="--------------------------------\n";
 
-bill+="Qty : "+totalQty+"\n";
+
 bill+="Items : "+cart.length+"\n";
 
 bill+="--------------------------------\n";
@@ -388,14 +388,13 @@ bill+="\n\n\n";
 Android.printBill(bill);
 
 }
-function barcodeScanned(barcode) {
-
-    document.getElementById("barcode").value = barcode;
-
-    searchProductByBarcode(barcode);
-
+function scanBarcode() {
+    if (window.Android) {
+        Android.scanBarcode();
+    } else {
+        alert("Please open this page in the Android App.");
+    }
 }
-
 async function searchProductByBarcode(barcode) {
 
     const q = query(

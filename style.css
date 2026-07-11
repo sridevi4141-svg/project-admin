@@ -186,16 +186,13 @@ table img{
 }
 
 .invoiceRow{
-
     display:flex;
-
-    justify-content:space-between;
-
-    margin:3px 0;
-
-    font-size:12px;
-
+    justify-content:flex-start;
+    font-size:20px;
+    font-weight:bold;
+    margin:8px 0;
 }
+
 
 .receiptTable{
 
@@ -212,12 +209,14 @@ table img{
     border-bottom:1px dashed #000;
 
     padding:3px 0;
+    font-size: 16px;
 
 }
 
 .receiptTable td{
 
     padding:3px 0;
+    font-size: 16px;
 
 }
 
@@ -243,7 +242,20 @@ hr{
     margin:5px 0;
 
 }
+#scanBtn {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 8px 0;
+}
 
+#scanBtn:hover {
+    background: #0056b3;
+}
 
 /* ================= PRINT ================= */
 
