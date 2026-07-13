@@ -6,11 +6,13 @@ import {
     addDoc,
     doc,
     getDoc,
+    getDocs,
+    query,
+    where,
     setDoc,
     updateDoc,
     runTransaction
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
 let products = [];
 let bill = [];
 let grandTotal = 0;
@@ -389,39 +391,25 @@ bill+="\n\n\n";
 Android.printBill(bill);
 
 }
-function barcodeScanned(barcode) {
+async function barcodeScanned(barcode) {
 
-    alert("Scanned Barcode : " + barcode);
-
-    console.log("Barcode =", barcode);
-
-}
-function scanBarcode() {
-    if (window.Android) {
-        Android.scanBarcode();
-    } else {
-        alert("Please open this page in the Android App.");
-    }
-}
-async function searchProductByBarcode(barcode) {
-
-    const q = query(
-        collection(db, "products"),
-        where("barcode", "==", barcode)
+    const index = products.findIndex(
+        p => String(p.barcode) === String(barcode)
     );
 
-    const snap = await getDocs(q);
+    if (index >= 0) {
 
-    if (!snap.empty) {
-
-        const product = snap.docs[0].data();
-
-        addToCart(product);
+        addToBill(index);
 
     } else {
 
         alert("Product Not Found");
 
     }
-
+}function scanBarcode() {
+    if (window.Android) {
+        Android.scanBarcode();
+    } else {
+        alert("Please open this page in the Android App.");
+    }
 }
