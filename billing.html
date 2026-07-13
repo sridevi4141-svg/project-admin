@@ -19,6 +19,14 @@
 <!-- Product List -->
 
 <h2>Available Products</h2><br>
+<div class="barcode-box">
+    <input 
+      type="text" 
+      id="barcodeInput" 
+      placeholder="Scan Barcode"
+      autofocus>
+</div>
+<br>
 <input
     type="text"
     id="search"
@@ -89,20 +97,6 @@ Clear Bill
 <button onclick="printBill()">
 Print Bill
 </button>
- <button onclick="scanBarcode()">📷 Scan Barcode</button>
- <script>
- function scanBarcode() {
-    alert("JS Function Called");
-
-    if (window.Android) {
-        alert("Calling Android...");
-        Android.scanBarcode();
-    } else {
-        alert("Android not found");
-    }
-}
-</script>
-</div>
   
 
 
@@ -221,18 +215,9 @@ Invoice :
 </div>
     
 <script type="module" src="billing.js"></script>
-<button onclick="testAndroid()">Test Android</button>
 
-<script>
-function testAndroid() {
-    alert(typeof Android);
 
-    if (typeof Android !== "undefined") {
-        alert("Android object found");
-    } else {
-        alert("Android object NOT found");
-    }
-}
+
 </script>
 
 </body>

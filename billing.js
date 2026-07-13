@@ -406,10 +406,68 @@ async function barcodeScanned(barcode) {
         alert("Product Not Found");
 
     }
-}function scanBarcode() {
-    if (window.Android) {
-        Android.scanBarcode();
-    } else {
-        alert("Please open this page in the Android App.");
+}
+// Barcode Scanner (USB Wireless Keyboard Mode)
+
+let barcodeInput = document.getElementById("barcodeInput");
+
+barcodeInput.addEventListener("keydown", function(e){
+
+    if(e.key === "Enter"){
+
+        let barcode = barcodeInput.value.trim();
+
+        if(barcode !== ""){
+
+            console.log("Barcode Scanned:", barcode);
+
+            searchBarcodeProduct(barcode);
+
+            barcodeInput.value="";
+        }
     }
+
+});
+function searchBarcodeProduct(barcode){
+
+    let index = products.findIndex(
+        p => p.barcode === barcode
+    );
+
+    console.log("Product Index:", index);
+    console.log("Product:", products[index]);
+
+    if(index !== -1){
+
+        addToBill(index);
+
+    }else{
+
+        alert("Barcode Product Not Found");
+    }
+}
+// Wireless USB Barcode Scanner (Keyboard Mode)
+
+//let barcodeInput = document.getElementById("barcodeInput");
+
+if(barcodeInput){
+
+    barcodeInput.addEventListener("keydown", function(e){
+
+        if(e.key === "Enter"){
+
+            let barcode = barcodeInput.value.trim();
+
+            if(barcode !== ""){
+
+                console.log("Scanned:", barcode);
+
+                barcodeScanned(barcode);
+
+                barcodeInput.value = "";
+            }
+        }
+
+    });
+
 }
