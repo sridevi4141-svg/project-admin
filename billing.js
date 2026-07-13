@@ -61,6 +61,7 @@ function displayProducts() {
             <td>₹${item.purchasePrice}</td>
 
             <td>${item.quantity}</td>
+            <td>${item.barcode}</td>
 
             <td>
 

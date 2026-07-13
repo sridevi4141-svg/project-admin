@@ -32,7 +32,7 @@ window.addProduct = async function () {
     const purchasePrice = Number(document.getElementById("purchasePrice").value);
     const salesPrice = Number(document.getElementById("salesPrice").value);
     const quantity = Number(document.getElementById("quantity").value);
-    const barcode = document.getElementById("barcode").value
+    const barcode = document.getElementById("barcode").value;
 
     if (!name || !purchasePrice || !salesPrice || !quantity) {
         alert("Please fill all fields");
@@ -47,7 +47,8 @@ window.addProduct = async function () {
             image,
             purchasePrice,
             salesPrice,
-            quantity
+            quantity,
+            barcode,
 
         });
 
@@ -58,6 +59,7 @@ window.addProduct = async function () {
         document.getElementById("purchasePrice").value = "";
         document.getElementById("salesPrice").value = "";
         document.getElementById("quantity").value = "";
+        document.getElementById("barcode").value = "";
 
     } catch (error) {
 
@@ -93,6 +95,8 @@ function loadProducts() {
                     <td>₹${item.salesPrice}</td>
 
                     <td>${item.quantity}</td>
+                    <td>${item.barcode}</td>
+
 
                     <td>
                         <td>
@@ -339,7 +343,13 @@ window.showProfitReport = async function () {
     }
 
 };
+function barcodeScanned(barcode) {
+    alert("Scanned: " + barcode);
+
+    // Next step lo Firebase lo barcode search chesi
+    // product auto add chestam.
+}
 loadSales();
 
 loadStock();
-loadProfitReport();
+//loadProfitReport();
