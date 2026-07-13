@@ -390,10 +390,11 @@ Android.printBill(bill);
 
 }
 function barcodeScanned(barcode) {
-    alert("Scanned : " + barcode);
 
-    // Next step:
-    // Firebase search
+    alert("Scanned Barcode : " + barcode);
+
+    console.log("Barcode =", barcode);
+
 }
 function scanBarcode() {
     if (window.Android) {
