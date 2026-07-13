@@ -347,11 +347,11 @@ function bluetoothPrint(){
 
 let bill="";
 
-bill+="[C]<b>SRI LAKSHMI CHANDRIKA</b>\n";
-bill+="[C]<b>TRADERS</b>\n";
-bill+="[C]Komaripalem - 533346\n";
-bill+="[C]Cinema Hall Road\n";
-bill+="[C]Ph : 9299999117 / 8333853111\n";
+bill+="[C]<b>SRI DHANA LAKSHMI RICE</b>\n";
+bill+="[C]<b>AND GENERAL STORE</b>\n";
+bill+="[C]Suryanarayanapuram - 533344\n";
+
+bill+="[C]Ph : 9652209111 \n";
 bill+="--------------------------------\n";
 
 bill+="Invoice : "+invoiceNo+"\n";
