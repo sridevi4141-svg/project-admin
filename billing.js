@@ -389,6 +389,12 @@ bill+="\n\n\n";
 Android.printBill(bill);
 
 }
+function barcodeScanned(barcode) {
+    alert("Scanned : " + barcode);
+
+    // Next step:
+    // Firebase search
+}
 function scanBarcode() {
     if (window.Android) {
         Android.scanBarcode();
