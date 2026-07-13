@@ -89,7 +89,18 @@ Clear Bill
 Print Bill
 </button>
  <button onclick="scanBarcode()">📷 Scan Barcode</button>
+ <script>
+ function scanBarcode() {
+    alert("JS Function Called");
 
+    if (window.Android) {
+        alert("Calling Android...");
+        Android.scanBarcode();
+    } else {
+        alert("Android not found");
+    }
+}
+</script>
 </div>
   
 
