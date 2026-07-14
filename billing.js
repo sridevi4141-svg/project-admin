@@ -358,7 +358,11 @@ function bluetoothPrint() {
     printdata += "--------------------------------\n";
     printdata += "[R]<b>Grand Total : ₹" + grandTotal + "</b>\n";
     printdata += "--------------------------------\n";
-    printdata += "[C]Thank You Visit Again\n\n\n";
+    printdata += "[C]Thank You Visit Again\n\n";
+    printdata += "[C]Designed and Developed by\n";
+    printdata += "[C]<b>VAKULA SOFTWARE SOLUTION</b>\n";
+    printdata += "[C]PRIVATE LIMITED\n";
+    printdata += "\n\n\n";
 
     Android.printBill(printdata);
 
