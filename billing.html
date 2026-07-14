@@ -7,97 +7,114 @@
 
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    
 
 <div class="container">
- 
 
+    <h1>Cashier Billing System</h1>
 
-<h1>Cashier Billing System</h1>
-<h3 id="dateTime"></h3>
-<!-- Product List -->
+    <h3 id="dateTime"></h3>
 
-<h2>Available Products</h2><br>
-<div class="barcode-box">
-    <input 
-      type="text" 
-      id="barcodeInput" 
-      placeholder="Scan Barcode"
-      autofocus>
+    <!-- Products -->
+
+    <h2>Available Products</h2>
+
+    <div class="barcode-box">
+        <input
+            type="text"
+            id="barcodeInput"
+            placeholder="Scan Barcode"
+            autofocus>
+    </div>
+
+    <br>
+
+    <input
+        type="text"
+        id="search"
+        placeholder="Search Product..."
+        onkeyup="searchProduct()">
+
+    <br><br>
+
+    <table>
+
+        <thead>
+
+        <tr>
+
+            <th>Image</th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Barcode</th>
+            <th>Action</th>
+
+        </tr>
+
+        </thead>
+
+        <tbody id="productList">
+
+        </tbody>
+
+    </table>
+
+    <br><br>
+
+    <!-- Customer Bill -->
+
+    <h2>Customer Bill</h2>
+
+    <table>
+
+        <thead>
+
+        <tr>
+
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Total</th>
+
+        </tr>
+
+        </thead>
+
+        <tbody id="billTable">
+
+        </tbody>
+
+    </table>
+
+    <br>
+
+    <h2>
+        Grand Total :
+        <span id="customerGrandTotal">₹0</span>
+    </h2>
+
+    <button onclick="clearBill()">
+        Clear Bill
+    </button>
+
+    <button onclick="printBill()">
+        Print Bill
+    </button>
+
 </div>
-<br>
-<input
-    type="text"
-    id="search"
-    placeholder="Search Product..."
-    onkeyup="searchProduct()"
-> <br><br>
-
-<table>
-
-<thead>
-
-<tr>
-<th>Image</th>
-<th>Product</th>
-<th>salesPrice</th>
-<th>purchasePrice</th>
-<th>Quantity</th>
-<th>barcode</th>
-<th>Action</th>
-</tr>
-
-</thead>
-
-<tbody id="productList">
-
-</tbody>
-
-</table>
-
-<br><br>
-
-<!-- Bill Section -->
-
-<h2>Customer Bill</h2>
-
-<table>
-
-<thead>
-
-<thead>
-<tr>
-    <th>Product</th>
-    <th>Purchase Price</th>
-    <th>Sales Price</th>
-    <th>Qty</th>
-    <th>Total</th>
-</tr>
-</thead>
-
-</thead>
-
-<tbody id="billTable">
-
-</tbody>
-
-</table>
-
-<br>
-
-<span id="customerGrandTotal">₹0</span>
-<button onclick="clearBill()">
-Clear Bill
-</button>
-
-<button onclick="printBill()">
-Print Bill
-</button>
-  
 
 
-<div id="printArea" class="receipt" style="display:none;">
+<!-- Receipt Preview -->
+
+<div id="printArea"
+     class="receipt"
+     style="display:none;
+            width:300px;
+            margin:20px auto;
+            padding:15px;
+            border:1px solid #ccc;
+            background:#fff;">
 
     <h2 style="text-align:center;margin:0;">
         SRI DHANA LAKSHMI RICE
@@ -107,44 +124,51 @@ Print Bill
         AND GENERAL STORE
     </h3>
 
-    <div style="text-align:center;font-size:16px;">
+    <p style="text-align:center;margin:2px;">
         Suryanarayanapuram - 533344
-    </div>
+    </p>
 
-    <div style="text-align:center;font-size:16px;margin-bottom:10px;">
+    <p style="text-align:center;margin:2px;">
         Ph : 9652209111
-    </div>
+    </p>
 
     <hr>
 
-    <div style="display:flex;justify-content:space-between;font-size:16px;">
-        <span>Invoice : <span id="invoiceNo"></span></span>
+    <div style="display:flex;justify-content:space-between;">
+
+        <span>
+            Invoice :
+            <span id="invoiceNo"></span>
+        </span>
+
         <span id="date"></span>
+
     </div>
 
     <hr>
 
-    <table style="width:100%;font-size:18px;border-collapse:collapse;">
+    <table style="width:100%;border-collapse:collapse;">
+
         <tbody id="billItems">
+
         </tbody>
+
     </table>
 
     <hr>
 
-    <h2 style="text-align:right;margin:10px 0;">
-        Grand Total : <span id="printGrandTotal">₹0</span>
+    <h2 style="text-align:right;">
+        Grand Total :
+        <span id="printGrandTotal">₹0</span>
     </h2>
 
-    <div style="text-align:center;font-size:18px;font-weight:bold;">
+    <p style="text-align:center;font-weight:bold;">
         Thank You Visit Again
-    </div>
+    </p>
 
 </div>
+
 <script type="module" src="billing.js"></script>
-
-
-
-
 
 </body>
 </html>

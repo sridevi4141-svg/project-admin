@@ -237,23 +237,22 @@ window.printBill = async function () {
 
             });
         }
-
-        // Receipt Items
-        let rows = "";
+// Receipt Preview
+let rows = "";
 
 bill.forEach(item => {
 
     rows += `
     <tr>
-        <td style="padding:6px 0;width:70%;">
+        <td style="width:70%;padding:6px 0;">
             ${item.name}
         </td>
 
-        <td style="text-align:center;width:10%;">
+        <td style="width:10%;text-align:center;">
             ${item.qty}
         </td>
 
-        <td style="text-align:right;width:20%;">
+        <td style="width:20%;text-align:right;">
             ₹${item.total}
         </td>
     </tr>
@@ -261,15 +260,18 @@ bill.forEach(item => {
 
 });
 
+// Update Receipt
 document.getElementById("billItems").innerHTML = rows;
 document.getElementById("invoiceNo").innerText = currentInvoice;
 document.getElementById("date").innerText = new Date().toLocaleString();
 document.getElementById("printGrandTotal").innerText = "₹" + grandTotal;
-        // Show Receipt
-        const printArea = document.getElementById("printArea");
-        printArea.style.display = "block";
 
-        setTimeout(() => {
+// Show Preview
+const printArea = document.getElementById("printArea");
+printArea.style.display = "block";
+
+// Bluetooth Print
+setTimeout(() => {
 
     if (window.Android) {
 
@@ -283,17 +285,18 @@ document.getElementById("printGrandTotal").innerText = "₹" + grandTotal;
 
 }, 300);
 
-        window.onafterprint = function () {
+// Clear Bill
+window.onafterprint = function () {
 
-            printArea.style.display = "none";
+    printArea.style.display = "none";
 
-            bill = [];
-            grandTotal = 0;
+    bill = [];
+    grandTotal = 0;
 
-            displayBill();
+    displayBill();
 
-        };
-
+};        // Show Receipt
+        
     } catch (error) {
 
         console.error(error);
