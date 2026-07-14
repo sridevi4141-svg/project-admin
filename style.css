@@ -372,3 +372,37 @@ button{
         margin:3px 0;
     }
 }
+
+#printArea{
+    width:300px;
+    margin:auto;
+    background:#fff;
+    padding:15px;
+    font-size:18px;
+    font-family:Arial,sans-serif;
+}
+
+#printArea table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+#printArea td{
+    border:none;
+    padding:6px 0;
+}
+
+#printArea h2{
+    text-align:center;
+    margin:5px 0;
+}
+
+#printArea h3{
+    text-align:center;
+    margin:3px 0;
+}
+
+#printArea p{
+    text-align:center;
+    margin:2px 0;
+}

@@ -244,20 +244,20 @@ window.printBill = async function () {
         bill.forEach(item => {
 
             rows += `
-                <tr>
-                    <td style="width:70%;padding:5px 0;">
-                        ${item.name}
-                    </td>
+<tr>
+    <td style="padding:6px 0;font-size:18px;">
+        ${item.name}
+    </td>
 
-                    <td style="text-align:center;width:10%;">
-                        ${item.qty}
-                    </td>
+    <td style="text-align:center;padding:6px 0;font-size:18px;">
+        ${item.qty}
+    </td>
 
-                    <td style="text-align:right;width:20%;">
-                        ₹${item.total}
-                    </td>
-                </tr>
-            `;
+    <td style="text-align:right;padding:6px 0;font-size:18px;font-weight:bold;">
+        ₹${item.total}
+    </td>
+</tr>
+`;
 
         });
 
