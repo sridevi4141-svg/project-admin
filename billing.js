@@ -148,7 +148,7 @@ function displayBill() {
 
     });
 
-    document.getElementById("grandTotal").innerHTML = "₹" + grandTotal;
+    document.getElementById("customerGrandTotal").innerHTML = "₹" + grandTotal;
 }
 
 // Search
@@ -263,7 +263,7 @@ window.printBill = async function () {
 
         // Update Receipt
         document.getElementById("billTable").innerHTML = rows;
-       document.getElementById("customerGrandTotal").innerHTML = "₹" + grandTotal;
+      document.getElementById("printGrandTotal").innerText = "₹" + grandTotal;
         
         // Show Receipt
         const printArea = document.getElementById("printArea");
