@@ -343,53 +343,51 @@ async function getInvoiceNumber() {
 
     return "INV-" + invoiceNo.toString().padStart(4, "0");
 }
-function bluetoothPrint(){
+function bluetoothPrint() {
 
-let bill="";
+    let bill = "";
 
-bill+="[C]<b>SRI DHANA LAKSHMI RICE</b>\n";
-bill+="[C]<b>AND GENERAL STORE</b>\n";
-bill+="[C]Suryanarayanapuram - 533344\n";
+    bill += "[C]<font size='big'><b>SRI DHANA LAKSHMI RICE</b></font>\n";
+    bill += "[C]<b>AND GENERAL STORE</b>\n";
+    bill += "[C]Suryanarayanapuram - 533344\n";
+    bill += "[C]Ph : 9652209111\n";
+    bill += "--------------------------------\n";
 
-bill+="[C]Ph : 9652209111 \n";
-bill+="--------------------------------\n";
+    bill += "Invoice : " + invoiceNo + "\n";
+    bill += "Date    : " + date + "\n";
+    bill += "--------------------------------\n";
 
-bill+="Invoice : "+invoiceNo+"\n";
-bill+=date+"\n";
+    let totalQty = 0;
 
-bill+="--------------------------------\n";
+    cart.forEach(item => {
 
-bill+="[C]<b>CASH SALE</b>\n";
+        totalQty += Number(item.qty);
 
-bill+="--------------------------------\n";
+        let name = item.name.substring(0, 18).padEnd(18, " ");
+        let qty = String(item.qty).padStart(3, " ");
+        let amount = ("₹" + item.total).padStart(10, " ");
 
-bill+="Item      Qty   Price   Amt\n";
+        bill += name + qty + amount + "\n";
+    });
 
-cart.forEach(item=>{
+    bill += "--------------------------------\n";
 
-bill+=item.name+"   "+item.qty+"   "+item.price+"   "+item.total+"\n";
+    bill += ("Qty").padEnd(20, " ") + totalQty + "\n";
 
-});
+    bill += "--------------------------------\n";
 
-bill+="--------------------------------\n";
+    bill += "[L]<font size='big'><b>Grand Total : ₹" + grandTotal + "</b></font>\n";
 
+    bill += "Received    : ₹" + grandTotal + "\n";
+    bill += "Balance     : ₹0\n";
 
-bill+="Items : "+cart.length+"\n";
+    bill += "--------------------------------\n";
 
-bill+="--------------------------------\n";
+    bill += "[C]<b>Thank You Visit Again</b>\n";
 
-bill+="Total : "+grandTotal+"\n";
-bill+="Received : "+grandTotal+"\n";
-bill+="Balance : 0\n";
+    bill += "\n\n\n";
 
-bill+="--------------------------------\n";
-
-bill+="[C]Thank You Visit Again\n";
-
-bill+="\n\n\n";
-
-Android.printBill(bill);
-
+    Android.printBill(bill);
 }
 async function barcodeScanned(barcode) {
 
