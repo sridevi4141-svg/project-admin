@@ -238,62 +238,59 @@ window.printBill = async function () {
             });
         }
 
-        // Invoice & Date
-       // document.getElementById("printInvoice").innerText = currentInvoice;
-        //document.getElementById("printDate").innerText =
-            new Date().toLocaleString();
-
-        // Bill Items
+        // Receipt Items
         let rows = "";
-        let totalQty = 0;
 
-        bill.forEach((item, index) => {
-
-            totalQty += item.qty;
+        bill.forEach(item => {
 
             rows += `
-            <tr>
-                <td>${index + 1}</td>
-                <td>${item.name}</td>
-                <td>${item.qty}</td>
-                <td>₹${item.salesPrice}</td>
-                <td>₹${item.total}</td>
-            </tr>
+                <tr>
+                    <td style="width:70%;padding:5px 0;">
+                        ${item.name}
+                    </td>
+
+                    <td style="text-align:center;width:10%;">
+                        ${item.qty}
+                    </td>
+
+                    <td style="text-align:right;width:20%;">
+                        ₹${item.total}
+                    </td>
+                </tr>
             `;
+
         });
 
-        //document.getElementById("printItems").innerHTML = rows;
+        // Update Receipt
+        document.getElementById("billTable").innerHTML = rows;
+        document.getElementById("grandTotal").innerText = "₹" + grandTotal;
 
-       
-       // document.getElementById("totalItems").innerText = bill.length;
-
-       // document.getElementById("printTotal").innerText = "₹" + grandTotal;
-       // document.getElementById("received").innerText = "₹" + grandTotal;
-
-        // Show Print Area
+        // Show Receipt
         const printArea = document.getElementById("printArea");
         printArea.style.display = "block";
 
         setTimeout(() => {
 
-    if (window.Android) {
+            if (window.Android) {
 
-    const billData = document.getElementById("printArea").innerText;
-    Android.printBill(billData);
+                const billData = document.getElementById("printArea").innerText;
+                Android.printBill(billData);
 
-} else {
+            } else {
 
-    window.print();
+                window.print();
 
-}
+            }
 
-}, 500);
+        }, 300);
+
         window.onafterprint = function () {
 
             printArea.style.display = "none";
 
             bill = [];
             grandTotal = 0;
+
             displayBill();
 
         };
@@ -306,6 +303,7 @@ window.printBill = async function () {
     }
 
 };
+
 async function getInvoiceNumber() {
 
     const counterRef = doc(db, "counter", "invoice");
