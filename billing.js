@@ -124,7 +124,7 @@ window.addToBill = function(index){
 
 
 // Display Bill
-function displayBill(){
+function displayBill() {
 
     let table = document.getElementById("billTable");
 
@@ -132,36 +132,24 @@ function displayBill(){
 
     grandTotal = 0;
 
-    bill.forEach(item=>{
+    bill.forEach(item => {
 
         grandTotal += item.total;
 
         table.innerHTML += `
+            <tr>
+                <td style="padding:4px 0;">${item.name}</td>
 
-        <tr>
+                <td style="text-align:center;">${item.qty}</td>
 
-            <td>${item.name}</td>
-
-            <td>₹${item.purchasePrice}</td>
-
-            <td>₹${item.salesPrice}</td>
-
-            <td>${item.qty}</td>
-
-            <td>₹${item.total}</td>
-
-        </tr>
-
+                <td style="text-align:right;">₹${item.total}</td>
+            </tr>
         `;
 
     });
 
-    document.getElementById("grandTotal").innerHTML =
-    "Grand Total : ₹" + grandTotal;
-
+    document.getElementById("grandTotal").innerHTML = "₹" + grandTotal;
 }
-
-
 
 // Search
 window.searchProduct = function(){
@@ -251,8 +239,8 @@ window.printBill = async function () {
         }
 
         // Invoice & Date
-        document.getElementById("printInvoice").innerText = currentInvoice;
-        document.getElementById("printDate").innerText =
+       // document.getElementById("printInvoice").innerText = currentInvoice;
+        //document.getElementById("printDate").innerText =
             new Date().toLocaleString();
 
         // Bill Items
@@ -274,13 +262,13 @@ window.printBill = async function () {
             `;
         });
 
-        document.getElementById("printItems").innerHTML = rows;
+        //document.getElementById("printItems").innerHTML = rows;
 
        
-        document.getElementById("totalItems").innerText = bill.length;
+       // document.getElementById("totalItems").innerText = bill.length;
 
-        document.getElementById("printTotal").innerText = "₹" + grandTotal;
-        document.getElementById("received").innerText = "₹" + grandTotal;
+       // document.getElementById("printTotal").innerText = "₹" + grandTotal;
+       // document.getElementById("received").innerText = "₹" + grandTotal;
 
         // Show Print Area
         const printArea = document.getElementById("printArea");

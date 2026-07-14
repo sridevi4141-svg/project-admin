@@ -62,27 +62,11 @@
 
 <h2>Customer Bill</h2>
 
-<table>
-
-<thead>
-
-<thead>
-<tr>
-    <th>Product</th>
-    <th>Purchase Price</th>
-    <th>Sales Price</th>
-    <th>Qty</th>
-    <th>Total</th>
-</tr>
-</thead>
-
-</thead>
-
-<tbody id="billTable">
-
-</tbody>
-
+<table style="width:100%;border-collapse:collapse;">
+    <tbody id="billTable">
+    </tbody>
 </table>
+
 
 <br>
 
@@ -106,107 +90,48 @@ Print Bill
 
     <div class="receipt">
 
-<center>
+    <h2 style="text-align:center;margin:0;">
+        SRI DHANA LAKSHMI RICE
+    </h2>
 
-<h2>SRI DHANA LAKSHMI RICE</h2>
-<h2>AND GENERAL STORE</h2>
+    <h3 style="text-align:center;margin:0;">
+        AND GENERAL STORE
+    </h3>
 
-<p>Suryanarayanpuram - 533344</p>
+    <p style="text-align:center;margin:3px 0;">
+        Suryanarayanapuram - 533344
+    </p>
 
+    <p style="text-align:center;margin:3px 0;">
+        Ph : 9652209111
+    </p>
 
+    <hr>
 
-<p>Ph : 9652209111</p>
+    <div style="display:flex;justify-content:space-between;">
+        <span><b>Invoice :</b> <span id="invoiceNo"></span></span>
+        <span id="date"></span>
+    </div>
 
-<h3>TAX INVOICE</h3>
+    <hr>
 
-</center>
+    <table style="width:100%;border-collapse:collapse;">
 
-<hr>
+        <tbody id="billItems">
 
-<div class="invoiceRow">
+        </tbody>
 
-<span>
-Invoice :
-<b id="printInvoice"></b>
-</span>
+    </table>
 
-<span id="printDate"></span>
+    <hr>
 
-</div>
+    <h2 style="text-align:right;">
+        Grand Total : ₹<span id="grandTotal">0</span>
+    </h2>
 
-<hr>
-
-<center>
-<b>CASH SALE</b>
-</center>
-
-<hr>
-
-<table class="receiptTable">
-
-<thead>
-
-<tr>
-
-<th>#</th>
-<th>Item</th>
-<th>Qty</th>
-<th>Price</th>
-<th>Amt</th>
-
-</tr>
-
-</thead>
-
-<tbody id="printItems">
-
-</tbody>
-
-</table>
-
-<hr>
-
-<div class="invoiceRow">
-
-    <span>
-        <b>Items : <span id="totalItems"></span></b>
-    </span>
-
-</div>
-
-<hr>
-
-<div class="invoiceRow">
-
-<b>Total</b>
-
-<b id="printTotal"></b>
-
-</div>
-
-<div class="invoiceRow">
-
-<span>Received</span>
-
-<span id="received"></span>
-
-</div>
-
-<div class="invoiceRow">
-
-<span>Balance</span>
-
-<span>0</span>
-
-</div>
-
-<hr>
-
-<center>
-
-<b>Thank You Visit Again</b>
-
-</center>
+    <p style="text-align:center;font-weight:bold;">
+        Thank You Visit Again
+    </p>
 
 </div>
 </div>
