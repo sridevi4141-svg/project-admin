@@ -263,8 +263,8 @@ window.printBill = async function () {
 
         // Update Receipt
         document.getElementById("billTable").innerHTML = rows;
-        document.getElementById("grandTotal").innerText = "₹" + grandTotal;
-
+       document.getElementById("customerGrandTotal").innerHTML = "₹" + grandTotal;
+        
         // Show Receipt
         const printArea = document.getElementById("printArea");
         printArea.style.display = "block";
