@@ -271,18 +271,17 @@ window.printBill = async function () {
 
         setTimeout(() => {
 
-            if (window.Android) {
+    if (window.Android) {
 
-                const billData = document.getElementById("printArea").innerText;
-                Android.printBill(billData);
+        bluetoothPrint();
 
-            } else {
+    } else {
 
-                window.print();
+        window.print();
 
-            }
+    }
 
-        }, 300);
+}, 300);
 
         window.onafterprint = function () {
 
@@ -331,24 +330,23 @@ async function getInvoiceNumber() {
 }
 function bluetoothPrint() {
 
-    let bill = "";
+    let printdata = "";
 
     // Store Details
-    bill += "[C]<font size='big'><b>SRI DHANA LAKSHMI RICE</b></font>\n";
-    bill += "[C]<font size='big'><b>AND GENERAL STORE</b></font>\n";
-    bill += "[C]Suryanarayanapuram - 533344\n";
-    bill += "[C]Ph : 9652209111\n";
+    printdata += "[C]<font size='big'><b>SRI DHANA LAKSHMI RICE</b></font>\n";
+    printdata += "[C]<font size='big'><b>AND GENERAL STORE</b></font>\n";
+    printdata += "[C]Suryanarayanapuram - 533344\n";
+    printdatal += "[C]Ph : 9652209111\n";
 
-    bill += "\n";
+    printdata += "\n";
 
     // Invoice Details
-    bill += "Invoice No : " + invoiceNo + "\n";
-    bill += "Date : " + date + "\n";
-
-    bill += "--------------------------------\n";
+    printdata += "Invoice No : " + currentInvoice + "\n";
+printdata += "Date : " + new Date().toLocaleString() + "\n";
+    printdata += "--------------------------------\n";
 
     // Products
-    cart.forEach(item => {
+    bill.forEach(item =>  {
 
         let name = item.name.substring(0,18).padEnd(18,' ');
         let qty = String(item.qty).padStart(2,' ');
