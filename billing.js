@@ -335,45 +335,34 @@ function bluetoothPrint() {
 
     let printdata = "";
 
-    // Store Details
     printdata += "[C]<font size='big'><b>SRI DHANA LAKSHMI RICE</b></font>\n";
-    printdata += "[C]<font size='big'><b>AND GENERAL STORE</b></font>\n";
+    printdata += "[C]<b>AND GENERAL STORE</b>\n";
     printdata += "[C]Suryanarayanapuram - 533344\n";
-    printdata += "[C]Ph : 9652209111\n";
+    printdata += "[C]Ph : 9652209111\n\n";
 
-    printdata += "\n";
+    printdata += "Invoice : " + currentInvoice + "\n";
+    printdata += "Date : " + new Date().toLocaleString() + "\n";
 
-    // Invoice Details
-    printdata += "Invoice No : " + currentInvoice + "\n";
-printdata += "Date : " + new Date().toLocaleString() + "\n";
     printdata += "--------------------------------\n";
 
-    // Products
-    bill.forEach(item =>  {
+    bill.forEach(item => {
 
-        let name = item.name.substring(0,18).padEnd(18,' ');
-        let qty = String(item.qty).padStart(2,' ');
-        let amount = ("₹" + item.total).padStart(8,' ');
+        let name = item.name.substring(0,18).padEnd(18, " ");
+        let qty = String(item.qty).padStart(2, " ");
+        let amount = ("₹" + item.total).padStart(8, " ");
 
         printdata += name + qty + amount + "\n";
 
     });
 
     printdata += "--------------------------------\n";
-
-    // Grand Total
-    printdata += "[C]<font size='big'><b>Grand Total : ₹" + grandTotal + "</b></font>\n";
-
-    printdata += "\n";
-
-    // Footer
-    printdata += "[C]Thank You Visit Again\n";
-
-    printdata += "\n\n\n";
+    printdata += "[R]<b>Grand Total : ₹" + grandTotal + "</b>\n";
+    printdata += "--------------------------------\n";
+    printdata += "[C]Thank You Visit Again\n\n\n";
 
     Android.printBill(printdata);
-}
 
+}
 async function barcodeScanned(barcode) {
 
     const index = products.findIndex(
