@@ -97,66 +97,54 @@ Print Bill
   
 
 
-<!-- ===================== PRINT AREA ===================== -->
-
-<div id="printArea" style="display:none;">
-
-    <div class="receipt">
+<div id="printArea" class="receipt" style="display:none;">
 
     <h2 style="text-align:center;margin:0;">
         SRI DHANA LAKSHMI RICE
     </h2>
 
-    <h3 style="text-align:center;margin:0;">
+    <h3 style="text-align:center;margin:5px 0;">
         AND GENERAL STORE
     </h3>
 
-    <p style="text-align:center;margin:3px 0;">
+    <div style="text-align:center;font-size:16px;">
         Suryanarayanapuram - 533344
-    </p>
+    </div>
 
-    <p style="text-align:center;margin:3px 0;">
+    <div style="text-align:center;font-size:16px;margin-bottom:10px;">
         Ph : 9652209111
-    </p>
+    </div>
 
     <hr>
 
-    <div style="display:flex;justify-content:space-between;">
-        <span><b>Invoice :</b> <span id="invoiceNo"></span></span>
+    <div style="display:flex;justify-content:space-between;font-size:16px;">
+        <span>Invoice : <span id="invoiceNo"></span></span>
         <span id="date"></span>
     </div>
 
     <hr>
 
-    <table style="width:100%;border-collapse:collapse;">
-
+    <table style="width:100%;font-size:18px;border-collapse:collapse;">
         <tbody id="billItems">
-
         </tbody>
-
     </table>
 
     <hr>
 
-    <h2 style="text-align:right;">
-       <span id="printGrandTotal">₹0</span>
+    <h2 style="text-align:right;margin:10px 0;">
+        Grand Total : <span id="printGrandTotal">₹0</span>
     </h2>
 
-    <p style="text-align:center;font-weight:bold;">
+    <div style="text-align:center;font-size:18px;font-weight:bold;">
         Thank You Visit Again
-    </p>
+    </div>
 
 </div>
-</div>
-
-<!-- ===================== END PRINT ===================== -->
-</div>
-    
 <script type="module" src="billing.js"></script>
 
 
 
-</script>
+
 
 </body>
 </html>

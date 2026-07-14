@@ -241,30 +241,30 @@ window.printBill = async function () {
         // Receipt Items
         let rows = "";
 
-        bill.forEach(item => {
+bill.forEach(item => {
 
-            rows += `
-<tr>
-    <td style="padding:6px 0;font-size:18px;">
-        ${item.name}
-    </td>
+    rows += `
+    <tr>
+        <td style="padding:6px 0;width:70%;">
+            ${item.name}
+        </td>
 
-    <td style="text-align:center;padding:6px 0;font-size:18px;">
-        ${item.qty}
-    </td>
+        <td style="text-align:center;width:10%;">
+            ${item.qty}
+        </td>
 
-    <td style="text-align:right;padding:6px 0;font-size:18px;font-weight:bold;">
-        ₹${item.total}
-    </td>
-</tr>
-`;
+        <td style="text-align:right;width:20%;">
+            ₹${item.total}
+        </td>
+    </tr>
+    `;
 
-        });
+});
 
-        // Update Receipt
-        document.getElementById("billTable").innerHTML = rows;
-      document.getElementById("printGrandTotal").innerText = "₹" + grandTotal;
-        
+document.getElementById("billItems").innerHTML = rows;
+document.getElementById("invoiceNo").innerText = currentInvoice;
+document.getElementById("date").innerText = new Date().toLocaleString();
+document.getElementById("printGrandTotal").innerText = "₹" + grandTotal;
         // Show Receipt
         const printArea = document.getElementById("printArea");
         printArea.style.display = "block";
@@ -336,7 +336,7 @@ function bluetoothPrint() {
     printdata += "[C]<font size='big'><b>SRI DHANA LAKSHMI RICE</b></font>\n";
     printdata += "[C]<font size='big'><b>AND GENERAL STORE</b></font>\n";
     printdata += "[C]Suryanarayanapuram - 533344\n";
-    printdatal += "[C]Ph : 9652209111\n";
+    printdata += "[C]Ph : 9652209111\n";
 
     printdata += "\n";
 
@@ -352,23 +352,23 @@ printdata += "Date : " + new Date().toLocaleString() + "\n";
         let qty = String(item.qty).padStart(2,' ');
         let amount = ("₹" + item.total).padStart(8,' ');
 
-        bill += name + qty + amount + "\n";
+        printdata += name + qty + amount + "\n";
 
     });
 
-    bill += "--------------------------------\n";
+    printdata += "--------------------------------\n";
 
     // Grand Total
-    bill += "[C]<font size='big'><b>Grand Total : ₹" + grandTotal + "</b></font>\n";
+    printdata += "[C]<font size='big'><b>Grand Total : ₹" + grandTotal + "</b></font>\n";
 
-    bill += "\n";
+    printdata += "\n";
 
     // Footer
-    bill += "[C]Thank You Visit Again\n";
+    printdata += "[C]Thank You Visit Again\n";
 
-    bill += "\n\n\n";
+    printdata += "\n\n\n";
 
-    Android.printBill(bill);
+    Android.printBill(printdata);
 }
 
 async function barcodeScanned(barcode) {
