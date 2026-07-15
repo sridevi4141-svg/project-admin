@@ -167,6 +167,7 @@ window.loadSales = async function () {
     const snapshot = await getDocs(collection(db, "sales"));
 
     let sno = 1;
+    let totalSales = 0;
 
     snapshot.forEach((doc) => {
 
@@ -190,11 +191,15 @@ window.loadSales = async function () {
                 <td>₹${sale.total}</td>
             </tr>
             `;
+            totalSales += Number(sale.total);
         }
+        
 
     });
-
+    
+document.getElementById("totalSalesAmount").innerText = "₹" + totalSales;
 };
+
 function loadStock() {
 
     const table = document.getElementById("stockTable");
@@ -240,6 +245,7 @@ function loadStock() {
         });
 
     });
+    
 
 }
 window.showStockReport = function(){
