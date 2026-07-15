@@ -10,7 +10,7 @@ import {
     updateDoc,
     runTransaction,
     query,
-    orderBy
+    orderBy,getDocs,where
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 // Show / Hide Form
 window.showForm = function () {
@@ -100,9 +100,15 @@ function loadProducts() {
 
                     <td>
                         <td>
-    <button onclick="editProduct('${doc.id}', ${item.purchasePrice}, ${item.salesPrice})">
-        Edit
-    </button>
+
+<button onclick="editProduct('${doc.id}', ${item.purchasePrice}, ${item.salesPrice})">
+    Edit Price
+</button>
+
+<button onclick="addStock('${doc.id}', '${item.name}', ${item.quantity})">
+    Add Stock
+</button>
+
 </td>
                        
                     </td>
@@ -145,40 +151,50 @@ window.editProduct = async function(id, oldPurchase, oldSales) {
     }
 
 }
-function loadSales() {
+window.loadSales = async function () {
+
+    const from = document.getElementById("fromDate").value;
+    const to = document.getElementById("toDate").value;
+
+    if (!from || !to) {
+        alert("Please Select From Date and To Date");
+        return;
+    }
 
     const table = document.getElementById("salesTable");
+    table.innerHTML = "";
 
-    const q = query(
-        collection(db, "sales"),
-        orderBy("invoiceNo", "desc")
-    );
+    const snapshot = await getDocs(collection(db, "sales"));
 
-    onSnapshot(q, (snapshot) => {
+    let sno = 1;
 
-        table.innerHTML = "";
+    snapshot.forEach((doc) => {
 
-        snapshot.forEach((doc) => {
+        const sale = doc.data();
 
-            const sale = doc.data();
+        const saleDate = sale.date.split(",")[0];
+        const parts = saleDate.split("/");
+
+        const dbDate =
+            parts[2] + "-" +
+            parts[1].padStart(2, "0") + "-" +
+            parts[0].padStart(2, "0");
+
+        if (dbDate >= from && dbDate <= to) {
 
             table.innerHTML += `
             <tr>
-
+                <td>${sno++}</td>
                 <td>${sale.invoiceNo}</td>
-
                 <td>${sale.date}</td>
-
                 <td>₹${sale.total}</td>
-
             </tr>
             `;
-
-        });
+        }
 
     });
 
-}
+};
 function loadStock() {
 
     const table = document.getElementById("stockTable");
@@ -236,11 +252,13 @@ window.showStockReport = function(){
 
 window.showSalesReport = function () {
 
-    document.getElementById("salesSection").style.display = "block";
-
+   document.getElementById("salesSection").style.display = "block" ;
+    document.getElementById("purchaseSection").style.display = "none";
     document.getElementById("stockSection").style.display = "none";
 
-};
+    document.getElementById("salesTable").innerHTML = "";
+
+}
 window.showProfitReport = function () {
 
     document.getElementById("salesSection").style.display = "none";
@@ -349,7 +367,182 @@ function barcodeScanned(barcode) {
     // Next step lo Firebase lo barcode search chesi
     // product auto add chestam.
 }
-loadSales();
+window.showPurchaseReport = function(){
+
+    document.getElementById("purchaseSection").style.display="block";
+
+    document.getElementById("salesSection").style.display="none";
+
+    document.getElementById("stockSection").style.display="none";
+
+    
+
+}
 
 loadStock();
 //loadProfitReport();
+window.updateOldSales = async function () {
+
+    try {
+
+        const snapshot = await getDocs(collection(db, "sales"));
+
+        let count = 0;
+
+        for (const saleDoc of snapshot.docs) {
+
+            const sale = saleDoc.data();
+
+            // Skip if already updated
+            if (sale.reportDate) continue;
+
+            // Example date:
+            // 14/07/2026, 4:35:20 PM
+
+            const dateOnly = sale.date.split(",")[0];
+
+            const parts = dateOnly.split("/");
+
+            const reportDate =
+                parts[2] + "-" +
+                parts[1].padStart(2, "0") + "-" +
+                parts[0].padStart(2, "0");
+
+            await updateDoc(doc(db, "sales", saleDoc.id), {
+
+                reportDate: reportDate
+
+            });
+
+            count++;
+
+        }
+
+        alert(count + " Sales Updated Successfully");
+
+    } catch (error) {
+
+        console.log(error);
+
+        alert("Update Failed");
+
+    }
+
+};
+
+window.addStock = async function(id, name, currentQty){
+
+    const qty = prompt(
+        `${name}\n\nCurrent Stock : ${currentQty}\n\nEnter New Stock`
+    );
+
+    if(qty == null) return;
+
+    const addQty = Number(qty);
+
+    if(isNaN(addQty) || addQty <= 0){
+
+        alert("Enter Valid Quantity");
+
+        return;
+
+    }
+
+    try{
+
+        const productRef = doc(db,"products",id);
+
+        // Update Product Stock
+        await updateDoc(productRef,{
+            quantity : currentQty + addQty
+        });
+
+        // Save Purchase Report
+        await addDoc(collection(db,"purchaseReports"),{
+
+            product: name,
+
+            previousQty: currentQty,
+
+            addedQty: addQty,
+
+            currentQty: currentQty + addQty,
+
+            date: new Date().toLocaleString(),
+
+            reportDate: new Date().toISOString().split("T")[0]
+
+        });
+
+        alert("Stock Updated Successfully");
+
+    }catch(error){
+
+        console.log(error);
+
+        alert("Update Failed");
+
+    }
+
+}
+window.loadPurchaseReport = async function(){
+
+    const from = document.getElementById("purchaseFromDate").value;
+
+    const to = document.getElementById("purchaseToDate").value;
+
+    if(!from || !to){
+
+        alert("Select From Date and To Date");
+
+        return;
+
+    }
+
+    const table = document.getElementById("purchaseTable");
+
+    table.innerHTML = "";
+
+    const q = query(
+
+        collection(db,"purchaseReports"),
+
+        where("reportDate",">=",from),
+
+        where("reportDate","<=",to),
+
+        orderBy("reportDate","asc")
+
+    );
+
+    const snapshot = await getDocs(q);
+
+    let sno = 1;
+
+    snapshot.forEach(doc=>{
+
+        const item = doc.data();
+
+        table.innerHTML += `
+
+        <tr>
+
+            <td>${sno++}</td>
+
+            <td>${item.product}</td>
+
+            <td>${item.previousQty}</td>
+
+            <td>${item.addedQty}</td>
+
+            <td>${item.currentQty}</td>
+
+            <td>${item.date}</td>
+
+        </tr>
+
+        `;
+
+    });
+
+}

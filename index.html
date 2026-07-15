@@ -11,7 +11,10 @@
 
 <div class="container">
 
+
 <h1>Admin Dashboard</h1>
+
+
 
 <button class="add-btn" onclick="showForm()">
 + Add New Product
@@ -78,29 +81,51 @@ Save Product
 <button onclick="showSalesReport()">
     Sales Report
 </button>
-
 <button onclick="showStockReport()">
     Stock Report
 </button>
+<button onclick="showPurchaseReport()">
+    Purchase Report
+</button>
 
-<div id="salesSection" style="display:none;">
+<br><br>
+<br><br>
 
-    <h2>Sales Report</h2>
+<div id="purchaseSection" style="display:none;">
 
-    <table border="1">
+    <h2>Purchase Report</h2>
+
+    <label>From Date</label>
+    <input type="date" id="purchaseFromDate">
+
+    <label>To Date</label>
+    <input type="date" id="purchaseToDate">
+
+    <button onclick="loadPurchaseReport()">
+        Show Report
+    </button>
+
+    <br><br>
+
+    <table border="1" width="100%">
+
         <thead>
             <tr>
-                <th>Invoice</th>
+                <th>S.NO</th>
+                <th>Product</th>
+                <th>Previous Qty</th>
+                <th>Added Qty</th>
+                <th>Current Qty</th>
                 <th>Date</th>
-                <th>Total</th>
             </tr>
         </thead>
 
-        <tbody id="salesTable"></tbody>
+        <tbody id="purchaseTable"></tbody>
 
     </table>
 
 </div>
+
 
 <br>
 
@@ -124,9 +149,40 @@ Save Product
 </div>
 <br>
 <br>
-<button onclick="showProfitReport()">
-    Profit & Loss Report
-</button>
+<div id="salesSection" style="display:none;">
+
+    <h2>Sales Report</h2>
+
+    <label>From Date</label>
+    <input type="date" id="fromDate">
+
+    <label>To Date</label>
+    <input type="date" id="toDate">
+
+    <button onclick="loadSales()">
+        Show Report
+    </button>
+
+    <br><br>
+
+    <table border="1" width="100%">
+
+        <thead>
+            <tr>
+                <th>S.NO</th>
+                <th>Invoice</th>
+                <th>Date</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+
+        <tbody id="salesTable">
+
+        </tbody>
+
+    </table>
+
+</div>
 
 <br><br>
 
