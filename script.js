@@ -28,48 +28,67 @@ window.showForm = function () {
 window.addProduct = async function () {
 
     const name = document.getElementById("name").value;
-    const image = document.getElementById("image").value;
     const purchasePrice = Number(document.getElementById("purchasePrice").value);
     const salesPrice = Number(document.getElementById("salesPrice").value);
     const quantity = Number(document.getElementById("quantity").value);
     const barcode = document.getElementById("barcode").value;
 
-    if (!name || !purchasePrice || !salesPrice || !quantity) {
-        alert("Please fill all fields");
+    const imageFile = document.getElementById("image").files[0];
+
+    if (!name || !purchasePrice || !salesPrice || !quantity || !imageFile) {
+        alert("Please Fill All Fields");
         return;
     }
 
     try {
 
+        const formData = new FormData();
+
+        formData.append("file", imageFile);
+
+        formData.append("upload_preset", "billingimagesupload");
+
+        const response = await fetch(
+            "https://api.cloudinary.com/v1_1/dhudmqipj/image/upload",
+            {
+                method: "POST",
+                body: formData
+            }
+        );
+
+        const data = await response.json();
+
+        const imageUrl = data.secure_url;
+
         await addDoc(collection(db, "products"), {
 
             name,
-            image,
+            image: imageUrl,
             purchasePrice,
             salesPrice,
             quantity,
-            barcode,
+            barcode
 
         });
 
         alert("Product Added Successfully");
 
         document.getElementById("name").value = "";
-        document.getElementById("image").value = "";
         document.getElementById("purchasePrice").value = "";
         document.getElementById("salesPrice").value = "";
         document.getElementById("quantity").value = "";
         document.getElementById("barcode").value = "";
+        document.getElementById("image").value = "";
 
     } catch (error) {
 
-        console.error(error);
-        alert("Error adding product");
+        console.log(error);
+
+        alert("Upload Failed");
 
     }
 
-};
-
+}
 function loadProducts() {
 
     const table = document.getElementById("productTable");
