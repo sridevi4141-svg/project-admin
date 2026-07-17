@@ -183,7 +183,12 @@ window.loadSales = async function () {
     const table = document.getElementById("salesTable");
     table.innerHTML = "";
 
-    const snapshot = await getDocs(collection(db, "sales"));
+    const q = query(
+    collection(db, "sales"),
+    orderBy("invoiceNo", "asc")
+);
+
+const snapshot = await getDocs(q);
 
     let sno = 1;
     let totalSales = 0;
@@ -305,7 +310,12 @@ window.showProfitReport = async function () {
 
     try {
 
-        const salesSnap = await getDocs(collection(db, "sales"));
+       const q = query(
+    collection(db, "sales"),
+    orderBy("invoiceNo", "asc")
+);
+
+const snapshot = await getDocs(q);
 
         salesSnap.forEach((saleDoc) => {
 
@@ -477,7 +487,7 @@ window.addStock = async function(id, name, currentQty){
 
         const productRef = doc(db,"products",id);
 
-        // Update Product Stock
+        // Update Product Sto
         await updateDoc(productRef,{
             quantity : currentQty + addQty
         });

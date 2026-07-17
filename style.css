@@ -149,18 +149,13 @@ table img{
 
     width:58mm;
 
-    margin:auto;
+    margin:0 auto;
 
-    padding:5px;
+    padding:0;
 
-    font-family:monospace;
-
-    font-size:12px;
-
-    color:#000;
+    text-align:center;
 
 }
-
 .receipt h2{
 
     margin:0;
@@ -184,11 +179,16 @@ table img{
     font-size:12px;
 
 }
+.receipt img{
+    width:120px;
+    display:block;
+    margin:5px auto;
+}
 
 .invoiceRow{
     display:flex;
     justify-content:flex-start;
-    font-size:20px;
+    font-size:14px;
     font-weight:bold;
     margin:8px 0;
 }
@@ -216,7 +216,7 @@ table img{
 .receiptTable td{
 
     padding:3px 0;
-    font-size: 16px;
+    font-size: 20px;
 
 }
 
@@ -266,6 +266,7 @@ body{
 margin:0;
 
 padding:0;
+justify-content:center;
 
 }
 
@@ -390,6 +391,7 @@ button{
 #printArea td{
     border:none;
     padding:6px 0;
+    font-size: 18px;
 }
 
 #printArea h2{

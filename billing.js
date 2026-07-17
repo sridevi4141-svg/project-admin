@@ -11,7 +11,8 @@ import {
     where,
     setDoc,
     updateDoc,
-    runTransaction
+    runTransaction,
+    serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 let products = [];
 let bill = [];
@@ -206,12 +207,12 @@ window.printBill = async function () {
 
         // Save Sale
         await addDoc(collection(db, "sales"), {
-            invoiceNo,
-            date: new Date().toLocaleString(),
-            items: bill,
-            total: grandTotal
-        });
-
+    invoiceNo,
+    date: new Date().toLocaleString(),
+    items: bill,
+    total: grandTotal,
+    createdAt: serverTimestamp()
+});
         // Update Stock
         for (const item of bill) {
 
@@ -308,7 +309,16 @@ window.onafterprint = function () {
 
 async function getInvoiceNumber() {
 
-    const counterRef = doc(db, "counter", "invoice");
+    const now = new Date();
+
+    const year = now.getFullYear();
+
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+
+    const monthKey = `${year}-${month}`;
+
+    const counterRef = doc(db, "counter", monthKey);
+
     const counterSnap = await getDoc(counterRef);
 
     let invoiceNo = 1;
@@ -318,29 +328,34 @@ async function getInvoiceNumber() {
         invoiceNo = counterSnap.data().lastNo + 1;
 
         await updateDoc(counterRef, {
+
             lastNo: invoiceNo
+
         });
 
     } else {
 
         await setDoc(counterRef, {
+
             lastNo: 1
+
         });
 
     }
 
-    return "INV-" + invoiceNo.toString().padStart(4, "0");
+    return `INV-${year}${month}-${invoiceNo.toString().padStart(4,"0")}`;
+
 }
 function bluetoothPrint() {
 
     let printdata = "";
 
     printdata += "[C]<font size='big'><b>SRI DHANA LAKSHMI RICE</b></font>\n";
-    printdata += "[C]<b>AND GENERAL STORE</b>\n";
+    printdata += "[C]<font size='big'><b>AND GENERAL STORE</b></font>\n";
     printdata += "[C]Suryanarayanapuram - 533344\n";
     printdata += "[C]Ph : 9652209111\n\n";
-
-    printdata += "Invoice : " + currentInvoice + "\n";
+    printdata += "[C]========================\n";
+    printdata += "S.No : " + currentInvoice + "\n";
     printdata += "Date : " + new Date().toLocaleString() + "\n";
 
     printdata += "--------------------------------\n";
@@ -351,13 +366,13 @@ function bluetoothPrint() {
         let qty = String(item.qty).padStart(2, " ");
         let amount = ("₹" + item.total).padStart(8, " ");
 
-        printdata += name + qty + amount + "\n";
+        printData += String.format("%-16s %4s %8s\n", name, qty, amount);
 
     });
 
-    printdata += "--------------------------------\n";
-    printdata += "[R]<b>Grand Total : ₹" + grandTotal + "</b>\n";
-    printdata += "--------------------------------\n";
+    printData += "-------------------------------\n";
+    printData += String.format("%-18s %10s\n", "Grand Total :", "₹" + total);
+    printData += "-------------------------------\n";
     printdata += "[C]Thank You Visit Again\n\n";
     printdata += "[C]Designed and Developed by\n";
     printdata += "[C]<b>VAKULA SOFTWARE SOLUTION</b>\n";
