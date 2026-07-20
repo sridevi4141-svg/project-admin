@@ -10,7 +10,8 @@ import {
     updateDoc,
     runTransaction,
     query,
-    orderBy,getDocs,where
+    orderBy,getDocs,where,
+    deleteDoc
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 // Show / Hide Form
 window.showForm = function () {
@@ -97,15 +98,13 @@ function loadProducts() {
 
         table.innerHTML = "";
 
-        snapshot.forEach((doc) => {
+        snapshot.forEach((docSnap) => {
 
-            const item = doc.data();
+            const item = docSnap.data();
 
             table.innerHTML += `
                 <tr>
-                    <td>
-                        <img src="${item.image}" width="60">
-                    </td>
+                    <td><img src="${item.image}" width="60"></td>
 
                     <td>${item.name}</td>
 
@@ -114,31 +113,46 @@ function loadProducts() {
                     <td>₹${item.salesPrice}</td>
 
                     <td>${item.quantity}</td>
-                    <td>${item.barcode}</td>
 
+                    <td>${item.barcode || ""}</td>
 
                     <td>
-                        <td>
+                        <button onclick="editPrice('${docSnap.id}', ${item.salesPrice})">
+                            Edit Price
+                        </button>
 
-<button onclick="editProduct('${doc.id}', ${item.purchasePrice}, ${item.salesPrice})">
-    Edit Price
-</button>
+                        <button onclick="addStock('${docSnap.id}', ${item.quantity})">
+                            Add Stock
+                        </button>
 
-<button onclick="addStock('${doc.id}', '${item.name}', ${item.quantity})">
-    Add Stock
-</button>
-
-</td>
-                       
+                        <button onclick="deleteProduct('${docSnap.id}');">
+                            Delete
+                        </button>
                     </td>
                 </tr>
             `;
+
         });
 
     });
 
 }
+
 loadProducts();
+
+window.deleteProduct = async function(id) {
+
+    if (!confirm("Delete this product?")) return;
+
+    try {
+        await deleteDoc(doc(db, "products", id));
+        alert("Product Deleted Successfully");
+    } catch (e) {
+        console.log(e);
+        alert("Delete Failed");
+    }
+
+}
 window.editProduct = async function(id, oldPurchase, oldSales) {
 
     const purchasePrice = prompt("Enter New Purchase Price", oldPurchase);
