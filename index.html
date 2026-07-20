@@ -3,198 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Dashboard</title>
+<title>Finance Software</title>
 
 <link rel="stylesheet" href="style.css">
+
+<!-- Font Awesome Icons -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 </head>
 <body>
 
 <div class="container">
 
+<h1>Hi 👋</h1>
 
-<h1>Admin Dashboard</h1>
+<p>Select Login</p>
 
+<div class="cards">
 
+<div class="card" onclick="ownerLogin()">
 
-<button class="add-btn" onclick="showForm()">
-+ Add New Product
-</button>
+<i class="fa-solid fa-user-tie"></i>
 
-<div id="productForm" style="display:none;">
-
-<h2>Add New Product</h2>
-
-<input type="text" id="name" placeholder="Product Name">
-
-<input type="file" id="image" accept="image/*">
-
-<input type="number" id="purchasePrice" placeholder="Purchase Price">
-
-<input type="number" id="salesPrice" placeholder="Sales Price">
-
-<input type="number" id="quantity" placeholder="Quantity">
-<input type="number" id="barcode" placeholder="Scan or Enter Barcode">
-
-<button onclick="addProduct()">
-Save Product
-</button>
+<h2>Owner</h2>
 
 </div>
 
-<br><br>
+<div class="card" onclick="staffLogin()">
 
-<table>
+<i class="fa-solid fa-users"></i>
 
-<thead>
-
-<tr>
-
-<th>Image</th>
-
-<th>Name</th>
-
-<th>Purchase Price</th>
-
-<th>Sales Price</th>
-
-<th>Quantity</th>
-<th>barcode</th>
-
-<th>Action</th>
-
-</tr>
-
-</thead>
-
-<tbody id="productTable">
-
-</tbody>
-
-</table>
+<h2>Staff</h2>
 
 </div>
 
-<br><br>
-
-<br><br>
-
-<button onclick="showSalesReport()">
-    Sales Report
-</button>
-<button onclick="showStockReport()">
-    Stock Report
-</button>
-<button onclick="showPurchaseReport()">
-    Purchase Report
-</button>
-
-    <button onclick="showProfitReport()">
-    Profit & Loss Report
-</button>
-
-
-
-<br><br>
-
-<div id="purchaseSection" style="display:none;">
-
-    <h2>Purchase Report</h2>
-
-    <label>From Date</label>
-    <input type="date" id="purchaseFromDate">
-
-    <label>To Date</label>
-    <input type="date" id="purchaseToDate">
-
-    <button onclick="loadPurchaseReport()">
-        Show Report
-    </button>
-
-    <br><br>
-
-    <table border="1" width="100%">
-
-        <thead>
-            <tr>
-                <th>S.NO</th>
-                <th>Product</th>
-                <th>Previous Qty</th>
-                <th>Added Qty</th>
-                <th>Current Qty</th>
-                <th>Date</th>
-            </tr>
-        </thead>
-
-        <tbody id="purchaseTable"></tbody>
-
-    </table>
+</div>
 
 </div>
 
-<div id="salesSection" style="display:none;">
-
-    <h2>Sales Report</h2>
-
-    <label>From Date</label>
-    <input type="date" id="fromDate">
-
-    <label>To Date</label>
-    <input type="date" id="toDate">
-
-    <button onclick="loadSales()">
-        Show Report
-    </button>
-
-    <br><br>
-
-    <table border="1" width="100%">
-
-        <thead>
-            <tr>
-                <th>S.NO</th>
-                <th>Invoice</th>
-                <th>Date</th>
-                <th>Total</th>
-            </tr>
-        </thead>
-
-        <tbody id="salesTable">
-            
-
-        </tbody>
-
-    </table>
-<h3 style="text-align:right;margin-right:20px;">
-    Total Sales Amount :
-    <span id="totalSalesAmount">₹0</span>
-</h3>
-</div>
-<br>
-
-<div id="stockSection" style="display:none;">
-
-    <h2>Stock Report</h2>
-
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Product</th>
-                <th>Stock</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-
-        <tbody id="stockTable"></tbody>
-
-    </table>
-
-</div>
-<br>
-<br>
-
-<br><br>
-
-<div id="profitReport"></div>
 <script type="module" src="script.js"></script>
 
 </body>
