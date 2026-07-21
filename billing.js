@@ -273,7 +273,7 @@ printArea.style.display = "block";
 
 // Bluetooth Print
 setTimeout(() => {
-             alert(location.href);
+             
     if (window.Android) {
 
         bluetoothPrint();
