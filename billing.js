@@ -273,7 +273,7 @@ printArea.style.display = "block";
 
 // Bluetooth Print
 setTimeout(() => {
-
+             alert(location.href);
     if (window.Android) {
 
         bluetoothPrint();
@@ -349,6 +349,7 @@ async function getInvoiceNumber() {
 function bluetoothPrint() {
 
     let printdata = "";
+      alert("Bluetooth Print Called");
 
     printdata += "[C]<font size='big'><b>SRI DHANA LAKSHMI RICE</b></font>\n";
     printdata += "[C]<font size='big'><b>AND GENERAL STORE</b></font>\n";
@@ -362,17 +363,16 @@ function bluetoothPrint() {
 
     bill.forEach(item => {
 
-        let name = item.name.substring(0,18).padEnd(18, " ");
-        let qty = String(item.qty).padStart(2, " ");
-        let amount = ("₹" + item.total).padStart(8, " ");
+    let name = item.name.substring(0,18).padEnd(18, " ");
+    let qty = String(item.qty).padStart(2, " ");
+    let amount = ("₹" + item.total).padStart(8, " ");
 
-        printData += String.format("%-16s %4s %8s\n", name, qty, amount);
+    printdata += name + qty + amount + "\n";
 
-    });
-
-    printData += "-------------------------------\n";
-    printData += String.format("%-18s %10s\n", "Grand Total :", "₹" + total);
-    printData += "-------------------------------\n";
+});
+    printdata += "-------------------------------\n";
+    printdata += "Grand Total : ₹" + grandTotal + "\n";
+    printdata += "-------------------------------\n";
     printdata += "[C]Thank You Visit Again\n\n";
     printdata += "[C]Designed and Developed by\n";
     printdata += "[C]<b>VAKULA SOFTWARE SOLUTION</b>\n";
