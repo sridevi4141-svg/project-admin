@@ -349,7 +349,7 @@ async function getInvoiceNumber() {
 function bluetoothPrint() {
 
     let printdata = "";
-      alert("Bluetooth Print Called");
+      
 
     printdata += "[C]<font size='big'><b>SRI DHANA LAKSHMI RICE</b></font>\n";
     printdata += "[C]<font size='big'><b>AND GENERAL STORE</b></font>\n";
