@@ -1,0 +1,410 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:30px auto;
+}
+
+h1{
+    text-align:center;
+    color:#0d6efd;
+    margin-bottom:25px;
+}
+
+.form-section{
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom:25px;
+}
+
+.form-section h2{
+    margin-bottom:15px;
+    color:#333;
+}
+
+.form-section input{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:16px;
+}
+
+.form-section input:focus{
+    border-color:#0d6efd;
+    outline:none;
+}
+
+button{
+    padding:12px 25px;
+    background:#0d6efd;
+    color:#fff;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:16px;
+    transition:0.3s;
+    
+}
+
+button:hover{
+    background:#084298;
+}
+
+.report-buttons{
+    margin-bottom:20px;
+}
+
+.report-buttons button{
+    margin-right:10px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+table th{
+    background:#0d6efd;
+    color:#fff;
+    padding:12px;
+}
+
+table td{
+    padding:12px;
+    text-align:center;
+    border-bottom:1px solid #ddd;
+}
+
+table img{
+    width:60px;
+    height:60px;
+    border-radius:5px;
+    object-fit:cover;
+}
+
+.edit-btn{
+    background:#198754;
+    margin-right:5px;
+}
+
+.edit-btn:hover{
+    background:#146c43;
+}
+
+.delete-btn{
+    background:#dc3545;
+}
+
+.delete-btn:hover{
+    background:#bb2d3b;
+}
+
+#printArea h2{
+    font-size:16px;
+    margin:0;
+}
+
+#printArea h3{
+    font-size:14px;
+    margin:5px 0;
+}
+
+#printArea p{
+    margin:2px 0;
+    font-size:11px;
+}
+
+#printArea table{
+    width:100%;
+    font-size:11px;
+}
+
+#printArea th,
+#printArea td{
+    padding:3px;
+    text-align:center;
+
+
+}
+
+/* ================= THERMAL BILL ================= */
+
+.receipt{
+
+    width:58mm;
+
+    margin:0 auto;
+
+    padding:0;
+
+    text-align:center;
+
+}
+.receipt h2{
+
+    margin:0;
+
+    font-size:18px;
+
+}
+
+.receipt h3{
+
+    margin:4px 0;
+
+    font-size:16px;
+
+}
+
+.receipt p{
+
+    margin:2px 0;
+
+    font-size:12px;
+
+}
+.receipt img{
+    width:120px;
+    display:block;
+    margin:5px auto;
+}
+
+.invoiceRow{
+    display:flex;
+    justify-content:flex-start;
+    font-size:14px;
+    font-weight:bold;
+    margin:8px 0;
+}
+
+
+.receiptTable{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.receiptTable th{
+
+    text-align:left;
+
+    border-bottom:1px dashed #000;
+
+    padding:3px 0;
+    font-size: 16px;
+
+}
+
+.receiptTable td{
+
+    padding:3px 0;
+    font-size: 20px;
+
+}
+
+.receiptTable th:nth-child(3),
+.receiptTable td:nth-child(3),
+
+.receiptTable th:nth-child(4),
+.receiptTable td:nth-child(4),
+
+.receiptTable th:nth-child(5),
+.receiptTable td:nth-child(5){
+
+    text-align:right;
+
+}
+
+hr{
+
+    border:none;
+
+    border-top:1px dashed #000;
+
+    margin:5px 0;
+
+}
+#scanBtn {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 8px 0;
+}
+
+#scanBtn:hover {
+    background: #0056b3;
+}
+
+/* ================= PRINT ================= */
+
+@media print{
+
+body{
+
+margin:0;
+
+padding:0;
+justify-content:center;
+
+}
+
+body *{
+
+visibility:hidden;
+
+}
+
+#printArea,
+#printArea *{
+
+visibility:visible;
+
+}
+
+#printArea{
+
+display:block !important;
+
+position:absolute;
+
+left:0;
+
+top:0;
+
+width:58mm;
+
+background:#fff;
+
+padding:5px;
+
+}
+
+}
+@media(max-width:768px){
+
+table{
+    display:block;
+    overflow-x:auto;
+}
+
+.form-section input{
+    font-size:14px;
+}
+
+button{
+    width:100%;
+    margin-top:10px;
+}
+
+.report-buttons button{
+    width:100%;
+    margin-bottom:10px;
+}
+
+}
+@media print {
+
+    body *{
+        visibility:hidden;
+    }
+
+    #printArea,
+    #printArea *{
+        visibility:visible;
+    }
+
+    #printArea{
+
+        display:block !important;
+
+        position:fixed;
+
+        top:0;
+        left:0;
+
+        width:58mm;
+        min-height:auto;
+
+        background:#fff;
+
+        padding:5px;
+
+        z-index:9999;
+    }
+
+    .container{
+        display:none !important;
+    }
+
+    table{
+        width:100%;
+        border-collapse:collapse;
+    }
+
+    th,td{
+        font-size:12px;
+        padding:3px;
+        border:none;
+    }
+
+    h2,h3,p{
+        margin:3px 0;
+    }
+}
+
+#printArea{
+    width:300px;
+    margin:auto;
+    background:#fff;
+    padding:15px;
+    font-size:18px;
+    font-family:Arial,sans-serif;
+}
+
+#printArea table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+#printArea td{
+    border:none;
+    padding:6px 0;
+    font-size: 18px;
+}
+
+#printArea h2{
+    text-align:center;
+    margin:5px 0;
+}
+
+#printArea h3{
+    text-align:center;
+    margin:3px 0;
+}
+
+#printArea p{
+    text-align:center;
+    margin:2px 0;
+}
