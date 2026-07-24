@@ -65,6 +65,7 @@ function displayProducts() {
 
             <td>${item.quantity}</td>
             <td>${item.barcode}</td>
+            
 
             <td>
 
@@ -350,7 +351,7 @@ function bluetoothPrint() {
 
     let printdata = "";
       
-
+    printdata = "[C]\n";
     printdata += "[C]<font size='big'><b>SRI DHANA LAKSHMI RICE</b></font>\n";
     printdata += "[C]<font size='big'><b>AND GENERAL STORE</b></font>\n";
     printdata += "[C]Suryanarayanapuram - 533344\n";
@@ -363,11 +364,9 @@ function bluetoothPrint() {
 
     bill.forEach(item => {
 
-    let name = item.name.substring(0,18).padEnd(18, " ");
-    let qty = String(item.qty).padStart(2, " ");
-    let amount = ("₹" + item.total).padStart(8, " ");
+    let name = item.name.substring(0,16);
 
-    printdata += name + qty + amount + "\n";
+    printdata += `${name.padEnd(16)}${String(item.qty).padStart(4)}${("₹" + item.total).padStart(12)}\n`;
 
 });
     printdata += "-------------------------------\n";
