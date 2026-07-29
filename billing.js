@@ -354,20 +354,20 @@ function bluetoothPrint() {
     let printdata = "";
 
     printdata += "[C]<font size='big'><b>SRI DHANA LAKSHMI RICE</b></font>\n";
-    printdata += "[C]<b>AND GENERAL STORE</b>\n";
+    printdata += "[C]<font size='big'><b>AND GENERAL STORE</b></font>\n";
     printdata += "[C]Suryanarayanapuram - 533344\n";
     printdata += "[C]Ph : 9652209111\n";
     printdata += "--------------------------------\n";
 
-    printdata += "Invoice : " + currentInvoice + "\n";
-    printdata += "Date : " + new Date().toLocaleString() + "\n";
+    printdata += "[C]Invoice : " + currentInvoice + "\n";
+    printdata += "[C]Date : " + new Date().toLocaleString() + "\n";
     printdata += "--------------------------------\n";
 
     bill.forEach(item => {
 
         let name = item.name.substring(0, 20);
 
-        printdata += "[L]" + name + "[R]" + item.qty + "   ₹" + item.total + "\n";
+        printdata += "[C]" + name + "[R]" + item.qty + "   ₹" + item.total + "\n";
 
     });
 
