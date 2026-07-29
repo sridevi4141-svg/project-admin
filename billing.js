@@ -361,14 +361,14 @@ function bluetoothPrint() {
     printdata += "Date : " + new Date().toLocaleString() + "\n";
 
     printdata += "--------------------------------\n";
+printdata += "[L]Product[R]Qty   Amount\n";
+printdata += "--------------------------------\n";
 
-    bill.forEach(item => {
-
-    let name = item.name.substring(0,16);
-
-    printdata += `${name.padEnd(16)}${String(item.qty).padStart(4)}${("₹" + item.total).padStart(12)}\n`;
-
+bill.forEach(item => {
+    printdata += `[L]${item.name.substring(0,20)}[R]${item.qty}   ₹${item.total}\n`;
 });
+
+printdata += "--------------------------------\n";
     printdata += "-------------------------------\n";
     printdata += "Grand Total : ₹" + grandTotal + "\n";
     printdata += "-------------------------------\n";
