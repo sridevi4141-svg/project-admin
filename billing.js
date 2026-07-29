@@ -194,7 +194,7 @@ window.clearBill = function(){
 
 
 window.printBill = async function () {
-     alert("Android = " + typeof Android);
+     
 
 
     if (bill.length === 0) {
@@ -352,36 +352,35 @@ async function getInvoiceNumber() {
 function bluetoothPrint() {
 
     let printdata = "";
-      
-    printdata = "[C]\n";
+
     printdata += "[C]<font size='big'><b>SRI DHANA LAKSHMI RICE</b></font>\n";
-    printdata += "[C]<font size='big'><b>AND GENERAL STORE</b></font>\n";
+    printdata += "[C]<b>AND GENERAL STORE</b>\n";
     printdata += "[C]Suryanarayanapuram - 533344\n";
-    printdata += "[C]Ph : 9652209111\n\n";
-    printdata += "[C]========================\n";
-    printdata += "S.No : " + currentInvoice + "\n";
+    printdata += "[C]Ph : 9652209111\n";
+    printdata += "--------------------------------\n";
+
+    printdata += "Invoice : " + currentInvoice + "\n";
     printdata += "Date : " + new Date().toLocaleString() + "\n";
+    printdata += "--------------------------------\n";
+
+    bill.forEach(item => {
+
+        let name = item.name.substring(0, 20);
+
+        printdata += "[L]" + name + "[R]" + item.qty + "   ₹" + item.total + "\n";
+
+    });
 
     printdata += "--------------------------------\n";
-printdata += "[L]Product[R]Qty   Amount\n";
-printdata += "--------------------------------\n";
+    printdata += "[R]<b>Grand Total : ₹" + grandTotal + "</b>\n";
+    printdata += "--------------------------------\n";
 
-bill.forEach(item => {
-    printdata += `[L]${item.name.substring(0,20)}[R]${item.qty}   ₹${item.total}\n`;
-});
-
-printdata += "--------------------------------\n";
-    printdata += "-------------------------------\n";
-    printdata += "Grand Total : ₹" + grandTotal + "\n";
-    printdata += "-------------------------------\n";
-    printdata += "[C]Thank You Visit Again\n\n";
+    printdata += "[C]Thank You Visit Again\n";
     printdata += "[C]Designed and Developed by\n";
-    printdata += "[C]<b>VAKULA SOFTWARE SOLUTION</b>\n";
-    printdata += "[C]PRIVATE LIMITED\n";
-    printdata += "\n\n\n";
+    printdata += "[C]VAKULA SOFTWARE SOLUTION\n";
+    printdata += "[C]PRIVATE LIMITED\n\n\n";
 
     Android.printBill(printdata);
-
 }
 async function barcodeScanned(barcode) {
 
