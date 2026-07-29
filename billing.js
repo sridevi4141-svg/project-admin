@@ -194,6 +194,8 @@ window.clearBill = function(){
 
 
 window.printBill = async function () {
+     alert("Android = " + typeof Android);
+
 
     if (bill.length === 0) {
         alert("Bill Empty");
